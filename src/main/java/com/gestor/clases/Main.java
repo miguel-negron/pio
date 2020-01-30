@@ -21,6 +21,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
+		//Miguel estuvo aquÃ­
 		enf = Persistence.createEntityManagerFactory("Persistencia");
 
 		Tutor t = new Tutor("1", "Mateo", "Apell", "Dosque", "C/Urguilla", "Barcelona", "498349J", "4565432",
@@ -36,7 +37,7 @@ public class Main {
 		manager.close();
 
 		manager = enf.createEntityManager();
-		Alumno alumnoTemporal = new Alumno("43098573", "Miguel", "Negrón", "TONTO", new Date(), listaTutor.get(0), true, false, "píos");
+		Alumno alumnoTemporal = new Alumno("43098573", "Miguel", "Negrï¿½n", "TONTO", new Date(), listaTutor.get(0), true, false, "pï¿½os");
 		manager.getTransaction().begin();
 		manager.persist(alumnoTemporal);
 		manager.getTransaction().commit();
@@ -68,7 +69,7 @@ public class Main {
 
 	}
 	
-	// Aqui empieza la función insertar
+	// Aqui empieza la funciï¿½n insertar
 			public static void alta() {
 				manager = enf.createEntityManager();
 				System.out.println("Insertamos un alumno por consola.");
@@ -77,14 +78,14 @@ public class Main {
 				String dniTutor;
 				System.out.println("Introduzca su DNI.");
 				dniAlumno = sc.next();
-				String basura = sc.nextLine(); //Fix chapuza para eliminar la aparición de doble línea y aseguramos que se insertan todos los datos
+				String basura = sc.nextLine(); //Fix chapuza para eliminar la apariciï¿½n de doble lï¿½nea y aseguramos que se insertan todos los datos
 				System.out.println("Introduzca su nombre.");
 				nombreAlumno = sc.nextLine();
 				System.out.println("Introduzca el dni de su tutor.");
 				dniTutor = sc.nextLine();
 				// Tenemos que comprobar si existe el tutor en nuestra base de datos
 				Tutor tutor2 = manager.find(Tutor.class, dniTutor);
-				//Si existe añadimos el alumno a la database y si no existe le pedimos que seleccione un tutor existente
+				//Si existe aï¿½adimos el alumno a la database y si no existe le pedimos que seleccione un tutor existente
 				if (tutor2 == null) {
 					System.out.println("No hemos encontrado a nadie con ese DNI, por favor eliga un tutor existente.");
 				} else {
@@ -98,15 +99,15 @@ public class Main {
 				mostrarAlumnos();
 			}
 			
-		//Función eliminar
+		//Funciï¿½n eliminar
 			public static void baja() {
 				manager = enf.createEntityManager();
 				System.out.println("Escribe el dni del alumno que desea borrar.");
 				String dniAlumno = sc.next();
-				String basura = sc.nextLine(); //Fix chapuza para eliminar la aparición de doble línea y aseguramos que se insertan todos los datos
+				String basura = sc.nextLine(); //Fix chapuza para eliminar la apariciï¿½n de doble lï¿½nea y aseguramos que se insertan todos los datos
 				alumnoTemporal = manager.find(Alumno.class, dniAlumno);
 				System.out.println(alumnoTemporal);
-				System.out.println("¿Estás seguro que quieres eliminar a " + alumnoTemporal + " ?(Y/N)");
+				System.out.println("ï¿½Estï¿½s seguro que quieres eliminar a " + alumnoTemporal + " ?(Y/N)");
 				String confirmacion = sc.nextLine();
 				if(confirmacion.toLowerCase().equals("y")) {
 					//Borramos
@@ -137,18 +138,18 @@ public class Main {
 				manager = enf.createEntityManager();
 				System.out.println("Introduzca el DNI del alumno que desea modificar");
 				String dniAlumno = sc.next();
-				String basura = sc.nextLine(); //Fix chapuza para eliminar la aparición de doble línea y aseguramos que se insertan todos los datos
+				String basura = sc.nextLine(); //Fix chapuza para eliminar la apariciï¿½n de doble lï¿½nea y aseguramos que se insertan todos los datos
 				alumnoTemporal = manager.find(Alumno.class, dniAlumno);
 				//Vemos si existe el alumno buscado
 				if(alumnoTemporal == null) {
 					System.out.println("No se ha encontrado el alumno introducido.");
 				} else {
 					System.out.println("Alumno encontrado!");
-					System.out.println("Seleccione qué desea modificar:\n1:Dni. \n2:Nombre.\n3:Primer apellido.\n4:Segundo apellido.\n4:Tutor.\n5Entrega de la ficha.\n6:Entrega de la foto");
+					System.out.println("Seleccione quï¿½ desea modificar:\n1:Dni. \n2:Nombre.\n3:Primer apellido.\n4:Segundo apellido.\n4:Tutor.\n5Entrega de la ficha.\n6:Entrega de la foto");
 				}
 			}
 			
-			//Función para salir del programa
+			//Funciï¿½n para salir del programa
 			public static void salir() {
 				respuesta = 0;
 				System.out.println("Programa terminado.");
