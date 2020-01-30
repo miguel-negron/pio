@@ -21,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
-		//Miguel estuvo aquÃ­
+		//Miguel estuvo aqui ñ
 		enf = Persistence.createEntityManagerFactory("Persistencia");
 
 		Tutor t = new Tutor("1", "Mateo", "Apell", "Dosque", "C/Urguilla", "Barcelona", "498349J", "4565432",
@@ -145,7 +145,7 @@ public class Main {
 					System.out.println("No se ha encontrado el alumno introducido.");
 				} else {
 					System.out.println("Alumno encontrado!");
-					System.out.println("Seleccione quï¿½ desea modificar:\n1:Dni. \n2:Nombre.\n3:Primer apellido.\n4:Segundo apellido.\n4:Tutor.\n5Entrega de la ficha.\n6:Entrega de la foto");
+					System.out.println("Seleccione qu desea modificar:\n1:Dni. \n2:Nombre.\n3:Primer apellido.\n4:Segundo apellido.\n4:Tutor.\n5Entrega de la ficha.\n6:Entrega de la foto");
 				}
 			}
 			
