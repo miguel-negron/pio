@@ -22,10 +22,6 @@ public class Main {
 	public static void main(String[] args) {
 		//Branch miguel
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
-<<<<<<< HEAD
-		
-=======
->>>>>>> 94a3a22a5cd66f0193190c407da0272b7d2a60ff
 		enf = Persistence.createEntityManagerFactory("Persistencia");
 
 		
