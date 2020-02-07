@@ -22,7 +22,7 @@ public class ConsolaAlumno {
 	private static String dniTutor;
 	private static int diaFechaNacimiento;
 	private static int mesFechaNacimiento;
-	private static int añoFechaNacimiento;
+	private static int anioFechaNacimiento;
 
 	ConsolaAlumno(EntityManagerFactory enf) {
 		this.enf = enf;
@@ -32,7 +32,7 @@ public class ConsolaAlumno {
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
-					"1: Dar de alta a un alumno. \n2: Dar de baja a un alumno. \n3: Mostrar todos los alumnos. \n4: Modificar los datos de un alumno \n5: Mostrar alumnos por curso elegido. \n6: Búsqueda de alumno por DNI. \n7: Volver atrás."
+					"1: Dar de alta a un alumno. \n2: Dar de baja a un alumno. \n3: Mostrar todos los alumnos. \n4: Modificar los datos de un alumno \n5: Mostrar alumnos por curso elegido. \n6: Bï¿½squeda de alumno por DNI. \n7: Volver atrï¿½s."
 							+ "\n0: Finalizar el programa");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
@@ -64,7 +64,7 @@ public class ConsolaAlumno {
 		return respuesta;
 	}
 
-	// Aqui empieza la función insertar
+	// Aqui empieza la funciï¿½n insertar
 	public static void altaAlumno() {
 		manager = enf.createEntityManager();
 		System.out.println("Insertamos un alumno por consola.");
@@ -78,7 +78,7 @@ public class ConsolaAlumno {
 		dniTutor = sc.nextLine();
 		// Tenemos que comprobar si existe el tutor en nuestra base de datos
 		Tutor tutor2 = manager.find(Tutor.class, dniTutor);
-		// Si existe añadimos el alumno a la database y si no existe le pedimos que
+		// Si existe aï¿½adimos el alumno a la database y si no existe le pedimos que
 		// seleccione un tutor existente
 		if (tutor2 == null) {
 			System.out.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
@@ -95,7 +95,7 @@ public class ConsolaAlumno {
 		manager.close();
 	}
 
-	// Función eliminar
+	// Funciï¿½n eliminar
 	public static void bajaAlumno() {
 		manager = enf.createEntityManager();
 		System.out.println("Escribe el dni del alumno que desea borrar.");
@@ -103,7 +103,7 @@ public class ConsolaAlumno {
 		sc.nextLine();
 		alumnoTemporal = manager.find(Alumno.class, dniAlumno);
 		if (!(alumnoTemporal == null)) {
-			System.out.println("¿Estas seguro que quieres eliminar a " + alumnoTemporal.getNombre() + " ?(S/N)");
+			System.out.println("ï¿½Estas seguro que quieres eliminar a " + alumnoTemporal.getNombre() + " ?(S/N)");
 			String confirmacion = sc.nextLine();
 			if (confirmacion.toLowerCase().equals("s")) {
 				// Borramos
@@ -128,7 +128,7 @@ public class ConsolaAlumno {
 			System.out.println(al);
 		}
 		if(lista.isEmpty()) {
-			System.out.println("¡No hay alumnos!");
+			System.out.println("ï¿½No hay alumnos!");
 		}
 		manager.close();
 	}
@@ -151,7 +151,7 @@ public class ConsolaAlumno {
 			while (seguir) {
 				System.out.println("Alumno a modificar: " + alumnoTemporal);
 				System.out.println(
-						"Seleccione qué desea modificar:\n0:Dni.\n1:Nombre.\n2:Primer apellido.\n3:Segundo apellido.\n4:Fecha de nacimiento.\n5:Entrega de la ficha.\n6:Entrega de la foto.\n7:Curso");
+						"Seleccione quï¿½ desea modificar:\n0:Dni.\n1:Nombre.\n2:Primer apellido.\n3:Segundo apellido.\n4:Fecha de nacimiento.\n5:Entrega de la ficha.\n6:Entrega de la foto.\n7:Curso");
 				int opcion = sc.nextInt();
 				switch (opcion) {
 				case 0:
@@ -201,24 +201,24 @@ public class ConsolaAlumno {
 					System.out.println("Apellido modificado.");
 					break;
 				case 4:
-					System.out.println("Escriba el día.");
+					System.out.println("Escriba el dï¿½a.");
 					sc.nextLine();
 					diaFechaNacimiento = sc.nextInt();
 					System.out.println("Escriba el mes.");
 					sc.nextLine();
 					mesFechaNacimiento = sc.nextInt();
-					System.out.println("Escriba el año.");
+					System.out.println("Escriba el aï¿½o.");
 					sc.nextLine();
-					añoFechaNacimiento = sc.nextInt();
+					anioFechaNacimiento = sc.nextInt();
 					alumnoTemporal
-							.setFechaNac(LocalDate.of(añoFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento));
+							.setFechaNac(LocalDate.of(anioFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento));
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
 					System.out.println("Fecha de nacimiento modificada.");
 					break;
 				case 5:
-					System.out.println("¿Tiene la ficha? S/N");
+					System.out.println("ï¿½Tiene la ficha? S/N");
 					while (bucle) {
 						sc.nextLine();
 						entregado = sc.next();
@@ -239,7 +239,7 @@ public class ConsolaAlumno {
 					System.out.println("Entrega modificada.");
 					break;
 				case 6:
-					System.out.println("¿Tiene la foto? S/N");
+					System.out.println("ï¿½Tiene la foto? S/N");
 					while (bucle) {
 						sc.nextLine();
 						entregado = sc.next();
@@ -261,12 +261,12 @@ public class ConsolaAlumno {
 					break;
 				case 7:
 					System.out.println(
-							"Seleccione el nuevo curso.\n1: Píos. \n2: Devotos. \n3: Fanáticos. \n4: Iluminados");
+							"Seleccione el nuevo curso.\n1: Pï¿½os. \n2: Devotos. \n3: Fanï¿½ticos. \n4: Iluminados");
 					sc.nextLine();
 					int cursoSeleccionado = sc.nextInt();
 					switch (cursoSeleccionado) {
 					case 1:
-						alumnoTemporal.setCurso("Píos");
+						alumnoTemporal.setCurso("Pï¿½os");
 						manager.getTransaction().begin();
 						manager.persist(alumnoTemporal);
 						manager.getTransaction().commit();
@@ -280,7 +280,7 @@ public class ConsolaAlumno {
 						System.out.println("Curso modificado.");
 						break;
 					case 3:
-						alumnoTemporal.setCurso("Fanáticos");
+						alumnoTemporal.setCurso("Fanï¿½ticos");
 						manager.getTransaction().begin();
 						manager.persist(alumnoTemporal);
 						manager.getTransaction().commit();
@@ -296,7 +296,7 @@ public class ConsolaAlumno {
 					}
 					break;
 				}
-				System.out.println("¿Quieres seguir modificando este Alumno? s/n");
+				System.out.println("ï¿½Quieres seguir modificando este Alumno? s/n");
 				seguirModificando = sc.next();
 				if (seguirModificando.toLowerCase().equals("n")) {
 					seguir = false;
@@ -312,12 +312,12 @@ public class ConsolaAlumno {
 		manager = enf.createEntityManager();
 		List<Alumno> lista = manager.createQuery("FROM Alumno").getResultList();
 		System.out.println(
-				"Seleccione el curso que quiere mostrar: \n1: Píos. \n2: Devotos. \n3: Fanáticos. \n4: Iluminados");
+				"Seleccione el curso que quiere mostrar: \n1: Pï¿½os. \n2: Devotos. \n3: Fanï¿½ticos. \n4: Iluminados");
 		int curso = sc.nextInt();
 		switch (curso) {
 		case 1:
 			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("pios") || al.getCurso().toLowerCase().equals("píos")) {
+				if (al.getCurso().toLowerCase().equals("pios") || al.getCurso().toLowerCase().equals("pï¿½os")) {
 					System.out.println(al);
 					contadorAlumnos++;
 				}
@@ -334,7 +334,7 @@ public class ConsolaAlumno {
 		case 3:
 			for (Alumno al : lista) {
 				if (al.getCurso().toLowerCase().equals("fanaticos")
-						|| al.getCurso().toLowerCase().equals("fanáticos")) {
+						|| al.getCurso().toLowerCase().equals("fanï¿½ticos")) {
 					System.out.println(al);
 					contadorAlumnos++;
 				}
@@ -350,7 +350,7 @@ public class ConsolaAlumno {
 			break;
 		}
 		if (contadorAlumnos == 0) {
-			System.out.println("No se ha encontrado ningún alumno asignado a ese curso.");
+			System.out.println("No se ha encontrado ningï¿½n alumno asignado a ese curso.");
 		}
 		manager.close();
 	}
@@ -369,13 +369,13 @@ public class ConsolaAlumno {
 
 	}
 
-	// Función para salir del programa
+	// Funciï¿½n para salir del programa
 	public static void finalizarPrograma() {
 		respuesta = 0;
 	}
 
-	// Función retroceder
-	// Nos permite volver al anterior menú
+	// Funciï¿½n retroceder
+	// Nos permite volver al anterior menï¿½
 	public static void retroceder() {
 		respuesta = 9;
 	}

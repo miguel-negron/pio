@@ -22,6 +22,10 @@ public class Main {
 	public static void main(String[] args) {
 		//Branch miguel
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2bf0912a01815a9652dccad2a4153ff7ddbba4d
 		enf = Persistence.createEntityManagerFactory("Persistencia");
 
 		
@@ -39,7 +43,7 @@ public class Main {
 		manager.close();
 
 		manager = enf.createEntityManager();
-		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negrón", "TONTO", LocalDate.now(), listaTutor.get(0), true, false,
+		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negrï¿½n", "TONTO", LocalDate.now(), listaTutor.get(0), true, false,
 				"pios");
 		manager.getTransaction().begin();
 		manager.persist(alumnoTemporal);
