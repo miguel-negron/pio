@@ -47,13 +47,25 @@ public class Monitor implements Serializable {
 	public Monitor() {
 
 	}
+	
 
-	@Override
-	public String toString() {
-		return "Monitor [DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2
-				+ ", fechaNac=" + fechaNac + ", Correo=" + Correo + ", Localidad=" + Localidad + ", codigoPostal="
-				+ codigoPostal + ", telFijo=" + telFijo + ", Movil=" + Movil + ", telEmergencia1=" + telEmergencia1
-				+ ", telEmergencia2=" + telEmergencia2 + ", Ocupacion=" + Ocupacion + "]";
+	public Monitor(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac, String correo,
+			String localidad, String codigoPostal, String telFijo, String movil, String telEmergencia1,
+			String telEmergencia2, String ocupacion) {
+		super();
+		DNI = dNI;
+		Nombre = nombre;
+		Apellido1 = apellido1;
+		Apellido2 = apellido2;
+		this.fechaNac = fechaNac;
+		Correo = correo;
+		Localidad = localidad;
+		this.codigoPostal = codigoPostal;
+		this.telFijo = telFijo;
+		Movil = movil;
+		this.telEmergencia1 = telEmergencia1;
+		this.telEmergencia2 = telEmergencia2;
+		Ocupacion = ocupacion;
 	}
 
 	public String getDNI() {
@@ -163,24 +175,14 @@ public class Monitor implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public Monitor(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac, String correo,
-			String localidad, String codigoPostal, String telFijo, String movil, String telEmergencia1,
-			String telEmergencia2, String ocupacion) {
-		super();
-		DNI = dNI;
-		Nombre = nombre;
-		Apellido1 = apellido1;
-		Apellido2 = apellido2;
-		this.fechaNac = fechaNac;
-		Correo = correo;
-		Localidad = localidad;
-		this.codigoPostal = codigoPostal;
-		this.telFijo = telFijo;
-		Movil = movil;
-		this.telEmergencia1 = telEmergencia1;
-		this.telEmergencia2 = telEmergencia2;
-		Ocupacion = ocupacion;
+	
+	@Override
+	public String toString() {
+		return "Monitor [DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2
+				+ ", fechaNac=" + fechaNac + ", Correo=" + Correo + ", Localidad=" + Localidad + ", codigoPostal="
+				+ codigoPostal + ", telFijo=" + telFijo + ", Movil=" + Movil + ", telEmergencia1=" + telEmergencia1
+				+ ", telEmergencia2=" + telEmergencia2 + ", Ocupacion=" + Ocupacion + "]";
 	}
+
 
 }
