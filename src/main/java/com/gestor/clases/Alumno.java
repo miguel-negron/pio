@@ -1,7 +1,10 @@
 package com.gestor.clases;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +31,7 @@ public class Alumno implements Serializable{
 	@Column(name="APELLIDO_2")
 	private String Apellido2;
 	@Column(name="FECHA_NACIMIENTO")
-	private Date fechaNac;
+	private LocalDate fechaNac;
 	@ManyToOne(fetch = FetchType.LAZY)
 	//@JoinColumn(name="DNI_TUTOR")
 	//@Column(name="DNI_TUTOR")
@@ -46,10 +49,10 @@ public class Alumno implements Serializable{
 
 
 
-	public Alumno(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac,
+	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
 			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, String curso) {
 		super();
-		DNI = dNI;
+		DNI = dni;
 		Nombre = nombre;
 		Apellido1 = apellido1;
 		Apellido2 = apellido2;
@@ -66,8 +69,8 @@ public class Alumno implements Serializable{
 		return DNI;
 	}
 
-	public void setDNI(String dNI) {
-		DNI = dNI;
+	public void setDNI(String dni) {
+		DNI = dni;
 	}
 
 	public String getNombre() {
@@ -94,11 +97,11 @@ public class Alumno implements Serializable{
 		Apellido2 = apellido2;
 	}
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(Date fechaNac) {
+	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 
@@ -150,9 +153,21 @@ public class Alumno implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Alumno [DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2
-				+ ", fechaNac=" + fechaNac + ", Tutor=" + Tutor + ", fichaEntregada=" + fichaEntregada
-				+ ", fotoEntregada=" + fotoEntregada + ", Curso=" + Curso + "]";
+		String estadoFicha;
+		String estadoFoto;
+		if(fichaEntregada) {
+			estadoFicha = "Entregada";
+		} else {
+			estadoFicha = "No entregada";
+		}
+		if(fotoEntregada) {
+			estadoFoto = "Entregada";
+		} else {
+			estadoFoto = "No entregada";
+		}
+		return "Alumno: " + Nombre +  ", DNI: " + DNI + ", Primer apellido: " + Apellido1 + ", Segundo apellido: " + Apellido2
+				+ ", Fecha de nacimiento: " + fechaNac + ", Tutor=" + Tutor.getNombre() + ", Estado de la ficha: " + estadoFicha
+				+ ", Estado de la foto: " + estadoFoto + ", Curso: " + Curso;
 	}
 
 
