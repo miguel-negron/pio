@@ -43,6 +43,10 @@ public class Monitor implements Serializable {
 	private String telEmergencia2;
 	@Column(name = "OCUPACION")
 	private String Ocupacion;
+	@Column(name = "CURSO")
+	private String curso;
+	@Column(name = "TIENE_TITULO")
+	private boolean tieneTitulo;
 
 	public Monitor() {
 
@@ -51,7 +55,7 @@ public class Monitor implements Serializable {
 
 	public Monitor(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac, String correo,
 			String localidad, String codigoPostal, String telFijo, String movil, String telEmergencia1,
-			String telEmergencia2, String ocupacion) {
+			String telEmergencia2, String ocupacion, String curso, boolean tieneTitulo) {
 		super();
 		DNI = dNI;
 		Nombre = nombre;
@@ -66,6 +70,8 @@ public class Monitor implements Serializable {
 		this.telEmergencia1 = telEmergencia1;
 		this.telEmergencia2 = telEmergencia2;
 		Ocupacion = ocupacion;
+		this.curso = curso;
+		this.tieneTitulo = tieneTitulo;
 	}
 
 	public String getDNI() {
