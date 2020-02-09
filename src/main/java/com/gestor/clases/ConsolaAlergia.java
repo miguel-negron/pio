@@ -76,10 +76,11 @@ public class ConsolaAlergia {
 		System.out.println("Introduzca la alergia:");
 		sc.nextLine();
 		alergiaAlumno = sc.next();
-		Alergia alergia = new Alergia(new DNIAlergia(DNIAlumno, alergiaAlumno));
+		Alumno alumno = manager.find(Alumno.class, DNIAlumno);
+		//Alergia alergia = new Alergia(alergiaAlumno, DNIAlumno);
 		// Falta comprobar si ya existe la clave primaria
 		manager.getTransaction().begin();
-		manager.persist(alergia);
+		//manager.persist(alergia);
 		manager.getTransaction().commit();
 		System.out.println("Alergia introducida.");
 		manager.close();

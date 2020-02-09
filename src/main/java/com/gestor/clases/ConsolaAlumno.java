@@ -85,7 +85,7 @@ public class ConsolaAlumno {
 		if (tutor2 == null) {
 			System.out.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
 		} else {
-			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2, null,  true, true, Curso.colonia);
+			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2,   true, true, Curso.colonia);
 			try {
 				manager.getTransaction().begin();
 				manager.persist(alumnoTemporal);

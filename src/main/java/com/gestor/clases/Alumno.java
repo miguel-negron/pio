@@ -2,9 +2,6 @@ package com.gestor.clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,11 +30,7 @@ public class Alumno implements Serializable{
 	@Column(name="FECHA_NACIMIENTO")
 	private LocalDate fechaNac;
 	@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name="DNI_TUTOR")
-	//@Column(name="DNI_TUTOR")
 	private Tutor Tutor;
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Alergia Alergia;
 	@Column(name="FICHA_ENTREGADA")
 	private boolean fichaEntregada;
 	@Column(name="FOTO_ENTREGADA")
@@ -52,7 +45,7 @@ public class Alumno implements Serializable{
 
 
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			com.gestor.clases.Tutor tutor, com.gestor.clases.Alergia alergia, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
+			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
 		super();
 		DNI = dni;
 		Nombre = nombre;
@@ -60,7 +53,6 @@ public class Alumno implements Serializable{
 		Apellido2 = apellido2;
 		this.fechaNac = fechaNac;
 		Tutor = tutor;
-		Alergia = alergia;
 		this.fichaEntregada = fichaEntregada;
 		this.fotoEntregada = fotoEntregada;
 		Curso = curso;
@@ -115,14 +107,6 @@ public class Alumno implements Serializable{
 
 	public void setTutor(Tutor tutor) {
 		Tutor = tutor;
-	}
-	
-	public Alergia getAlergia() {
-		return Alergia;
-	}
-
-	public void setAlergia(Alergia alergia) {
-		Alergia = alergia;
 	}
 	
 	public boolean isFichaEntregada() {
