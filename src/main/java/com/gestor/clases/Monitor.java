@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gestor.enums.Cargo;
+
 @Entity
 @Table(name = "MONITOR")
 public class Monitor implements Serializable {
@@ -20,9 +22,9 @@ public class Monitor implements Serializable {
 	@Column(name = "DNI")
 	private String DNI;
 	@Column(name = "NOMBRE")
-	private String Nombre;
+	private String nombre;
 	@Column(name = "APELLIDO_1")
-	private String Apellido1;
+	private String apellido1;
 	@Column(name = "APELLIDO_2")
 	private String Apellido2;
 	@Column(name = "FECHA_NACIMIENTO")
@@ -42,7 +44,7 @@ public class Monitor implements Serializable {
 	@Column(name = "TEL_EMERGENCIA_2")
 	private String telEmergencia2;
 	@Column(name = "OCUPACION")
-	private String Ocupacion;
+	private Cargo cargo;
 	@Column(name = "CURSO")
 	private String curso;
 	@Column(name = "TIENE_TITULO")
@@ -55,21 +57,21 @@ public class Monitor implements Serializable {
 
 	public Monitor(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac, String correo,
 			String localidad, String codigoPostal, String telFijo, String movil, String telEmergencia1,
-			String telEmergencia2, String ocupacion, String curso, boolean tieneTitulo) {
+			String telEmergencia2, Cargo ocupacion, String curso, boolean tieneTitulo) {
 		super();
-		DNI = dNI;
-		Nombre = nombre;
-		Apellido1 = apellido1;
-		Apellido2 = apellido2;
+		this.DNI = dNI;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.Apellido2 = apellido2;
 		this.fechaNac = fechaNac;
-		Correo = correo;
-		Localidad = localidad;
+		this.Correo = correo;
+		this.Localidad = localidad;
 		this.codigoPostal = codigoPostal;
 		this.telFijo = telFijo;
-		Movil = movil;
+		this.Movil = movil;
 		this.telEmergencia1 = telEmergencia1;
 		this.telEmergencia2 = telEmergencia2;
-		Ocupacion = ocupacion;
+		this.cargo = ocupacion;
 		this.curso = curso;
 		this.tieneTitulo = tieneTitulo;
 	}
@@ -83,19 +85,19 @@ public class Monitor implements Serializable {
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
 	public String getApellido1() {
-		return Apellido1;
+		return apellido1;
 	}
 
 	public void setApellido1(String apellido1) {
-		Apellido1 = apellido1;
+		this.apellido1 = apellido1;
 	}
 
 	public String getApellido2() {
@@ -170,12 +172,12 @@ public class Monitor implements Serializable {
 		this.telEmergencia2 = telEmergencia2;
 	}
 
-	public String getOcupacion() {
-		return Ocupacion;
+	public Cargo getOcupacion() {
+		return cargo;
 	}
 
-	public void setOcupacion(String ocupacion) {
-		Ocupacion = ocupacion;
+	public void setOcupacion(Cargo cargo) {
+		this.cargo = cargo;
 	}
 
 	public static long getSerialversionuid() {
@@ -184,10 +186,10 @@ public class Monitor implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Monitor [DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2
+		return "Monitor [DNI=" + DNI + ", Nombre=" + nombre + ", Apellido1=" + apellido1 + ", Apellido2=" + Apellido2
 				+ ", fechaNac=" + fechaNac + ", Correo=" + Correo + ", Localidad=" + Localidad + ", codigoPostal="
 				+ codigoPostal + ", telFijo=" + telFijo + ", Movil=" + Movil + ", telEmergencia1=" + telEmergencia1
-				+ ", telEmergencia2=" + telEmergencia2 + ", Ocupacion=" + Ocupacion + "]";
+				+ ", telEmergencia2=" + telEmergencia2 + ", Ocupacion=" + cargo + "]";
 	}
 
 

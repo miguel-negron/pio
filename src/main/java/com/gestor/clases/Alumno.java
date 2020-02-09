@@ -2,9 +2,6 @@ package com.gestor.clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.gestor.enums.Curso;
 
 @Entity
 @Table(name="ALUMNO")
@@ -46,8 +45,6 @@ public class Alumno implements Serializable{
 	public Alumno() {
 		
 	}
-
-
 
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
 			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada) {
@@ -147,7 +144,7 @@ public class Alumno implements Serializable{
 	public void setCursoAutomatico() {
 		int edad = LocalDate.now().getYear() - fechaNac.getYear();
 		int edadMin = 17;
-		Curso[] cursos = com.gestor.clases.Curso.values();
+		Curso[] cursos = com.gestor.enums.Curso.values();
 		
 		for (int i = cursos.length - 1; i >= 0; i--) {
 			//System.out.println(i + " ---- " + cursos[i]);

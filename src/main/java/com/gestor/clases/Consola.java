@@ -8,8 +8,8 @@ public class Consola {
 	private static Scanner sc = new Scanner(System.in);
 	private static EntityManagerFactory enf;
 
-	Consola(EntityManagerFactory enf) {
-		this.enf = enf;
+	public Consola(EntityManagerFactory enf) {
+		Consola.enf = enf;
 	}
 
 	public void mostrarConsola() {
@@ -31,7 +31,5 @@ public class Consola {
 			}
 		}
 		System.out.println("Programa finalizado.");
-
 	}
-
 }

@@ -1,4 +1,4 @@
-package com.gestor.clases;
+package com.gestor.enums;
 
 public enum Curso {		//Estos son los nombres de todo el curso en total, compuestos de:
   //Curso:	||  Individuos:

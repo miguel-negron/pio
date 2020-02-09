@@ -1,15 +1,11 @@
 package com.gestor.clases;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.RollbackException;
 
 import com.gestor.clases.Alumno;
 
@@ -40,9 +36,13 @@ public class Main {
 		manager.close();
 
 		manager = enf.createEntityManager();
-		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "TONTO", LocalDate.now(), listaTutor.get(0), true, false);
+		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2002, 5, 5), listaTutor.get(0), true, false);
 		manager.getTransaction().begin();
 		manager.persist(alumnoTemporal);
+		
+		Alumno alumnoTemporal2 = new Alumno("2", "Miguel2", "Negron2", "ElMagnifico2", LocalDate.of(2014, 5, 5), listaTutor.get(0), true, false);
+		manager.persist(alumnoTemporal2);
+		
 		manager.getTransaction().commit();
 		manager.close();
 		////TEMPORAL
