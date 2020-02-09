@@ -85,7 +85,7 @@ public class ConsolaAlumno {
 		if (tutor2 == null) {
 			System.out.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
 		} else {
-			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2, true, true, Curso.colonia);
+			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2, true, true);
 			try {
 				manager.getTransaction().begin();
 				manager.persist(alumnoTemporal);
@@ -272,46 +272,12 @@ public class ConsolaAlumno {
 					sc.nextLine();
 					int cursoSeleccionado = sc.nextInt();
 					
-					
 					alumnoTemporal.setCurso(cursos[cursoSeleccionado - 1]);
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
 					System.out.println("Curso modificado.");
 					
-					/*
-					switch (cursoSeleccionado) {
-					case 1:
-						alumnoTemporal.setCurso("Pios");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					case 2:
-						alumnoTemporal.setCurso("Devotos");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					case 3:
-						alumnoTemporal.setCurso("Fanaticos");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					case 4:
-						alumnoTemporal.setCurso("Iluminados");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					}
-					break;
-					*/
 				}
 				System.out.println("Quieres seguir modificando este Alumno? s/n");
 				seguirModificando = sc.next();
@@ -339,44 +305,6 @@ public class ConsolaAlumno {
 		String hql = "FROM Alumno WHERE Curso = " + cursos[curso - 1];
 		
 		List<Alumno> lista = manager.createQuery(hql).getResultList();
-
-		/*
-		switch (curso) {
-		case 1:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("pios") || al.getCurso().toLowerCase().equals("pios")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		case 2:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("devotos")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		case 3:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("fanaticos")
-						|| al.getCurso().toLowerCase().equals("fanaticos")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		case 4:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("iluminados")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		}
-		*/
 		
 		//Recorremos los resultados con opccion de que no haya nada
 		if (lista.isEmpty()) {

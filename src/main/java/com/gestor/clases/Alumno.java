@@ -41,7 +41,7 @@ public class Alumno implements Serializable{
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
-	private Curso Curso;
+	private Curso curso;
 	
 	public Alumno() {
 		
@@ -50,7 +50,7 @@ public class Alumno implements Serializable{
 
 
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
+			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada) {
 		super();
 		DNI = dni;
 		Nombre = nombre;
@@ -60,9 +60,8 @@ public class Alumno implements Serializable{
 		Tutor = tutor;
 		this.fichaEntregada = fichaEntregada;
 		this.fotoEntregada = fotoEntregada;
-		Curso = curso;
+		this.setCursoAutomatico();
 	}
-
 
 
 	public String getDNI() {
@@ -138,11 +137,30 @@ public class Alumno implements Serializable{
 	}
 
 	public Curso getCurso() {
-		return Curso;
+		return curso;
 	}
 
 	public void setCurso(Curso curso) {
-		Curso = curso;
+		this.curso = curso;
+	}
+	
+	public void setCursoAutomatico() {
+		int edad = LocalDate.now().getYear() - fechaNac.getYear();
+		int edadMin = 17;
+		Curso[] cursos = com.gestor.clases.Curso.values();
+		
+		for (int i = cursos.length - 1; i >= 0; i--) {
+			//System.out.println(i + " ---- " + cursos[i]);
+			//System.out.println(edadMin + "<- min : e ->" + edad);
+			
+			if (edad > edadMin) {
+				this.setCurso(cursos[i]);
+				//System.out.println(this.getCurso());
+				return;
+			} else {
+				edadMin -= 3;
+			}
+		}
 	}
 
 	public static long getSerialversionuid() {
@@ -166,8 +184,8 @@ public class Alumno implements Serializable{
 			estadoFoto = "No entregada";
 		}
 		return "Alumno: " + Nombre +  ", DNI: " + DNI + ", Primer apellido: " + Apellido1 + ", Segundo apellido: " + Apellido2
-				+ ", Fecha de nacimiento: " + fechaNac + ", Tutor=" + Tutor.getNombre() + ", Estado de la ficha: " + estadoFicha
-				+ ", Estado de la foto: " + estadoFoto + ", Curso: " + Curso;
+				+ ", Fecha de nacimiento: " + fechaNac + ", Tutor=" + Tutor/* .getNombre() */ + ", Estado de la ficha: " + estadoFicha
+				+ ", Estado de la foto: " + estadoFoto + ", Curso: " + curso;
 	}
 
 
