@@ -36,12 +36,14 @@ public class Alumno implements Serializable{
 	//@JoinColumn(name="DNI_TUTOR")
 	//@Column(name="DNI_TUTOR")
 	private Tutor Tutor;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Alergia Alergia;
 	@Column(name="FICHA_ENTREGADA")
 	private boolean fichaEntregada;
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
-	private String Curso;
+	private Curso Curso;
 	
 	public Alumno() {
 		
@@ -50,7 +52,7 @@ public class Alumno implements Serializable{
 
 
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, String curso) {
+			com.gestor.clases.Tutor tutor, com.gestor.clases.Alergia alergia, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
 		super();
 		DNI = dni;
 		Nombre = nombre;
@@ -58,6 +60,7 @@ public class Alumno implements Serializable{
 		Apellido2 = apellido2;
 		this.fechaNac = fechaNac;
 		Tutor = tutor;
+		Alergia = alergia;
 		this.fichaEntregada = fichaEntregada;
 		this.fotoEntregada = fotoEntregada;
 		Curso = curso;
@@ -104,23 +107,24 @@ public class Alumno implements Serializable{
 	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
+	
 
-	@Override
-	public boolean equals(Object o) {
-		if(this == o) {
-			return true;
-		}
-		if(!(o instanceof Alumno)) {
-			return false;
-		}
-		return DNI != null && DNI.contentEquals(((Alumno) o).getDNI());
+	public Tutor getTutor() {
+		return Tutor;
+	}
+
+	public void setTutor(Tutor tutor) {
+		Tutor = tutor;
 	}
 	
-	@Override
-	public int hashCode() {
-		return 31;
+	public Alergia getAlergia() {
+		return Alergia;
 	}
 
+	public void setAlergia(Alergia alergia) {
+		Alergia = alergia;
+	}
+	
 	public boolean isFichaEntregada() {
 		return fichaEntregada;
 	}
@@ -137,17 +141,34 @@ public class Alumno implements Serializable{
 		this.fotoEntregada = fotoEntregada;
 	}
 
-	public String getCurso() {
+	public Curso getCurso() {
 		return Curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(Curso curso) {
 		Curso = curso;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) {
+			return true;
+		}
+		if(!(o instanceof Alumno)) {
+			return false;
+		}
+		return DNI != null && DNI.contentEquals(((Alumno) o).getDNI());
+	}
+	
+	@Override
+	public int hashCode() {
+		return 31;
+	}
+
 
 
 
@@ -172,13 +193,6 @@ public class Alumno implements Serializable{
 
 
 
-	public Tutor getTutor() {
-		return Tutor;
-	}
-
-	public void setTutor(Tutor tutor) {
-		Tutor = tutor;
-	}
 
 
 

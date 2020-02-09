@@ -1,10 +1,15 @@
 package com.gestor.clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +23,14 @@ public class Alergia implements Serializable {
 
 	@EmbeddedId()
 	private DNIAlergia NombreAlergia;
+	@OneToMany(mappedBy="Alergia", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//Puede que sea otro import(List)
+	private List<Alumno> alumnos = new ArrayList<>();
 		
+	public Alergia() {
+		
+	}
+	
 	public Alergia(DNIAlergia nombreAlergia) {
 		super();
 		NombreAlergia = nombreAlergia;
