@@ -16,7 +16,7 @@ public class Consola {
 		int opcion;
 		int respuesta = 9;
 		while (respuesta == 9) {
-			System.out.println("Seleccione el apartado que desea administrar.\n1: Alumnos. \n2: Monitores");
+			System.out.println("Seleccione el apartado que desea administrar.\n1: Alumnos. \n2: Monitores. \n3: Alergias");
 			opcion = sc.nextInt();
 			switch (opcion) {
 			case 1:
@@ -27,6 +27,11 @@ public class Consola {
 			case 2:
 				ConsolaMonitor cm = new ConsolaMonitor(enf);
 				respuesta = cm.mostrarConsolaMonitor();
+				break;
+				
+			case 3:
+				ConsolaAlergia cal = new ConsolaAlergia(enf);
+				respuesta = cal.mostrarConsolaAlergia();
 				break;
 			}
 		}
