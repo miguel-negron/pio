@@ -180,9 +180,15 @@ public class Alumno implements Serializable{
 		} else {
 			estadoFoto = "No entregada";
 		}
-		return "Alumno: " + Nombre +  ", DNI: " + DNI + ", Primer apellido: " + Apellido1 + ", Segundo apellido: " + Apellido2
-				+ ", Fecha de nacimiento: " + fechaNac + ", Tutor=" + Tutor/* .getNombre() */ + ", Estado de la ficha: " + estadoFicha
-				+ ", Estado de la foto: " + estadoFoto + ", Curso: " + curso;
+		return "DNI: " + DNI + "\n\t"
+				+ "Alumno: " + Nombre +  "\n\t"
+				+ "Primer apellido: " + Apellido1 + "\n\t"
+				+ "Segundo apellido: " + Apellido2 + "\n\t"
+				+ "Fecha de nacimiento: " + fechaNac + "\n\t"
+				+ "Tutor: " + Tutor/* .getNombre() */ + "\n\t"
+				+ "Estado de la ficha: " + estadoFicha + "\n\t"
+				+ "Estado de la foto: " + estadoFoto + "\n\t"
+				+ "Curso: " + curso;
 	}
 
 

@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
 
+import org.hibernate.query.Query;
+
 import com.gestor.enums.Curso;
 
 public class ConsolaAlumno {
@@ -129,11 +131,12 @@ public class ConsolaAlumno {
 
 	public static void mostrarAlumnos() {
 		manager = enf.createEntityManager();
-		List<Alumno> lista = manager.createQuery("FROM Alumno").getResultList();
+		List<Alumno> lista = manager.createQuery("FROM Alumno ORDER BY curso").getResultList();
 		
 		if(lista.isEmpty()) {
 			System.out.println("No hay alumnos!");
 		} else {
+			System.out.println("Hay " + lista.size() + "alumnos:");
 			for (Alumno al : lista) {
 				System.out.println(al);
 			}
@@ -314,9 +317,10 @@ public class ConsolaAlumno {
 		}
 		
 		int curso = sc.nextInt();
+				
 		
-		String hql = "FROM Alumno WHERE Curso = " + cursos[curso - 1];
-		
+		String hql = "FROM Alumno A WHERE A.CURSO = " + cursos[curso - 1];
+	
 		List<Alumno> lista = manager.createQuery(hql).getResultList();
 		
 		//Recorremos los resultados con opccion de que no haya nada
