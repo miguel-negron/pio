@@ -41,7 +41,7 @@ public class Alumno implements Serializable{
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
-	private String Curso;
+	private Curso Curso;
 	
 	public Alumno() {
 		
@@ -50,7 +50,7 @@ public class Alumno implements Serializable{
 
 
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, String curso) {
+			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
 		super();
 		DNI = dni;
 		Nombre = nombre;
@@ -137,11 +137,11 @@ public class Alumno implements Serializable{
 		this.fotoEntregada = fotoEntregada;
 	}
 
-	public String getCurso() {
+	public Curso getCurso() {
 		return Curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(Curso curso) {
 		Curso = curso;
 	}
 
