@@ -40,8 +40,8 @@ public class Main {
 		manager.close();
 
 		manager = enf.createEntityManager();
-		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negr�n", "TONTO", LocalDate.now(), listaTutor.get(0), true, false,
-				"pios");
+		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "TONTO", LocalDate.now(), listaTutor.get(0), true, false,
+				Curso.clan);
 		manager.getTransaction().begin();
 		manager.persist(alumnoTemporal);
 		manager.getTransaction().commit();
