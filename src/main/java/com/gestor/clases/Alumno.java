@@ -150,12 +150,12 @@ public class Alumno implements Serializable{
 		Curso[] cursos = com.gestor.clases.Curso.values();
 		
 		for (int i = cursos.length - 1; i >= 0; i--) {
-			System.out.println(i + " ---- " + cursos[i]);
-			System.out.println(edadMin + "<- min : e ->" + edad);
+			//System.out.println(i + " ---- " + cursos[i]);
+			//System.out.println(edadMin + "<- min : e ->" + edad);
 			
 			if (edad > edadMin) {
 				this.setCurso(cursos[i]);
-				System.out.println(this.getCurso());
+				//System.out.println(this.getCurso());
 				return;
 			} else {
 				edadMin -= 3;
