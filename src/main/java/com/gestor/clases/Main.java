@@ -20,6 +20,7 @@ public class Main {
 
 
 	public static void main(String[] args) {
+		//Branch miguel
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
 		enf = Persistence.createEntityManagerFactory("Persistencia");
 
@@ -50,6 +51,95 @@ public class Main {
 		consola.mostrarConsola();
 		
 	}
+<<<<<<< HEAD
 		
+=======
+	
+	// Aqui empieza la funci�n insertar
+			public static void alta() {
+				manager = enf.createEntityManager();
+				System.out.println("Insertamos un alumno por consola.");
+				String dniAlumno;
+				String nombreAlumno;
+				String dniTutor;
+				System.out.println("Introduzca su DNI.");
+				dniAlumno = sc.next();
+				String basura = sc.nextLine(); //Fix chapuza para eliminar la aparici�n de doble l�nea y aseguramos que se insertan todos los datos
+				System.out.println("Introduzca su nombre.");
+				nombreAlumno = sc.nextLine();
+				System.out.println("Introduzca el dni de su tutor.");
+				dniTutor = sc.nextLine();
+				// Tenemos que comprobar si existe el tutor en nuestra base de datos
+				Tutor tutor2 = manager.find(Tutor.class, dniTutor);
+				//Si existe a�adimos el alumno a la database y si no existe le pedimos que seleccione un tutor existente
+				if (tutor2 == null) {
+					System.out.println("No hemos encontrado a nadie con ese DNI, por favor eliga un tutor existente.");
+				} else {
+					alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", new Date(), tutor2, true, true, "");
+				}
+				manager.getTransaction().begin();
+				manager.persist(alumnoTemporal);
+				manager.getTransaction().commit();
+				manager.close();
+				respuesta = 9;
+				mostrarAlumnos();
+			}
+			
+		//Funci�n eliminar
+			public static void baja() {
+				manager = enf.createEntityManager();
+				System.out.println("Escribe el dni del alumno que desea borrar.");
+				String dniAlumno = sc.next();
+				String basura = sc.nextLine(); //Fix chapuza para eliminar la aparici�n de doble l�nea y aseguramos que se insertan todos los datos
+				alumnoTemporal = manager.find(Alumno.class, dniAlumno);
+				System.out.println(alumnoTemporal);
+				System.out.println("�Est�s seguro que quieres eliminar a " + alumnoTemporal + " ?(Y/N)");
+				String confirmacion = sc.nextLine();
+				if(confirmacion.toLowerCase().equals("y")) {
+					//Borramos
+					manager.getTransaction().begin();
+					manager.merge(alumnoTemporal); 
+					manager.remove(alumnoTemporal);
+					manager.getTransaction().commit();
+					System.out.println("Alumno " + alumnoTemporal + " borrado");
+				} else {
+					System.out.println("Alumno no borrado.");
+				}
+				respuesta = 9;
+				manager.close();
+				mostrarAlumnos();
+			}
+			
+			public static void mostrarAlumnos() {
+				manager = enf.createEntityManager();
+				List<Alumno> lista = manager.createQuery("FROM Alumno").getResultList();
+				for (Alumno al : lista) {
+					System.out.println(al);
+				}
+				manager.close();
+				respuesta = 9;
+			}
+			
+			public static void modificarAlumno() {
+				manager = enf.createEntityManager();
+				System.out.println("Introduzca el DNI del alumno que desea modificar");
+				String dniAlumno = sc.next();
+				String basura = sc.nextLine(); //Fix chapuza para eliminar la aparici�n de doble l�nea y aseguramos que se insertan todos los datos
+				alumnoTemporal = manager.find(Alumno.class, dniAlumno);
+				//Vemos si existe el alumno buscado
+				if(alumnoTemporal == null) {
+					System.out.println("No se ha encontrado el alumno introducido.");
+				} else {
+					System.out.println("Alumno encontrado!");
+					System.out.println("Seleccione qu desea modificar:\n1:Dni. \n2:Nombre.\n3:Primer apellido.\n4:Segundo apellido.\n4:Tutor.\n5Entrega de la ficha.\n6:Entrega de la foto");
+				}
+			}
+			
+			//Funci�n para salir del programa
+			public static void salir() {
+				respuesta = 0;
+				System.out.println("Programa terminado.");
+			}
+>>>>>>> master
 
 }
