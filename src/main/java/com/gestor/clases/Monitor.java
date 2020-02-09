@@ -2,6 +2,7 @@ package com.gestor.clases;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class Monitor implements Serializable {
 	@Column(name = "APELLIDO_2")
 	private String Apellido2;
 	@Column(name = "FECHA_NACIMIENTO")
-	private Date fechaNac;
+	private LocalDate fechaNac;
 	@Column(name = "CORREO")
 	private String Correo;
 	@Column(name = "LOCALIDAD")
@@ -53,7 +54,7 @@ public class Monitor implements Serializable {
 	}
 	
 
-	public Monitor(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac, String correo,
+	public Monitor(String dNI, String nombre, String apellido1, String apellido2, LocalDate fechaNac, String correo,
 			String localidad, String codigoPostal, String telFijo, String movil, String telEmergencia1,
 			String telEmergencia2, String ocupacion, String curso, boolean tieneTitulo) {
 		super();
@@ -106,11 +107,11 @@ public class Monitor implements Serializable {
 		Apellido2 = apellido2;
 	}
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(Date fechaNac) {
+	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 

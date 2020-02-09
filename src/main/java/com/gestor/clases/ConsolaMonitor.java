@@ -1,12 +1,33 @@
 package com.gestor.clases;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 public class ConsolaMonitor {
-	
+	private static Monitor monitorTemporal;
+	static int diaNacimiento;
+	static int mesNacimiento;
+	static int anioNacimiento;
+	private static String dniMonitor;
+	private static String nombreMonitor;
+	private static String primerApellidoMonitor;
+	private static String segundoApellidoMonitor;
+	private static LocalDate fechaNacMonitor;
+	private static String correoMonitor;
+	private static String localidadMonitor;
+	private static String codigoPostalMonitor;
+	private static String telefonoFijoMonitor;
+	private static String telefonoMovilMonitor;
+	private static String telefonoEmergencia1;
+	private static String telefonoEmergencia2;
+	private static String ocupacionMonitor;
+	private static String cursoMonitor;
+	private static boolean tieneTitulo;
 	private static int respuesta;
+	private static EntityManager manager;
 	private static EntityManagerFactory enf;
 	private static Scanner sc = new Scanner(System.in);
 	
@@ -31,6 +52,68 @@ public class ConsolaMonitor {
 			}
 		}
 		return respuesta;
+	}
+	
+	
+	//funcion insertar
+	public static void altaMonitor() {
+		boolean bucle = true;
+		String entregado;
+		manager = enf.createEntityManager();
+		System.out.println("Insertamos un monitor por consola");
+		System.out.println("Introduzca su DNI.");
+		dniMonitor = sc.next();
+		System.out.println(dniMonitor);
+		sc.hasNextLine();
+		System.out.println("Introduzca su nombre");
+		nombreMonitor = sc.nextLine();
+		System.out.println("Introduzca su primer apellido");
+		primerApellidoMonitor = sc.nextLine();
+		System.out.println("Introduzca su segundo apellido");
+		segundoApellidoMonitor = sc.nextLine();
+		System.out.println("Introduzca su dia de nacimiento");
+		diaNacimiento = sc.nextInt();
+		System.out.println("Introduzca su mes de nacimiento");
+		mesNacimiento = sc.nextInt();
+		System.out.println("Introduzca su año de nacimiento");
+		anioNacimiento = sc.nextInt();
+		System.out.println("Introduzca su correo");
+		correoMonitor = sc.nextLine();
+		System.out.println("Introduzca su localidad");
+		localidadMonitor= sc.nextLine();
+		System.out.println("Introduzca su codigo postal");
+		codigoPostalMonitor= sc.nextLine();
+		System.out.println("Introduzca un telefono fijo");
+		telefonoFijoMonitor= sc.nextLine();
+		System.out.println("Introduzca un telefono movil");
+		telefonoMovilMonitor= sc.nextLine();
+		System.out.println("Introduzca un telefono de emergencia");
+		telefonoEmergencia1 = sc.nextLine();
+		System.out.println("Introduzca otro telefono de emergencia");
+		telefonoEmergencia2 = sc.nextLine();
+		System.out.println("Introduzca la ocupacion");
+		ocupacionMonitor= sc.nextLine();
+		System.out.println("Introduzca el curso");
+		cursoMonitor= sc.nextLine();
+		System.out.println("¿Tiene titulo?");
+		while (bucle) {
+			sc.nextLine();
+			entregado = sc.next();
+			if (entregado.toLowerCase().equals("s")) {
+				tieneTitulo = true;
+				bucle = false;
+			} else if (entregado.toLowerCase().equals("n")) {
+				tieneTitulo = false;
+				bucle = false;
+			} else {
+				System.out.println("Entrada incorrecta, por favor escriba S o N.");
+			}
+		}
+	
+		monitorTemporal = new Monitor(dniMonitor, nombreMonitor, primerApellidoMonitor, segundoApellidoMonitor,LocalDate.of(anioNacimiento, mesNacimiento, diaNacimiento), correoMonitor, localidadMonitor, codigoPostalMonitor, telefonoFijoMonitor, telefonoMovilMonitor, telefonoEmergencia1, telefonoEmergencia2, ocupacionMonitor, cursoMonitor, tieneTitulo);
+
+			
+		
 	}
 	
 	
