@@ -29,7 +29,7 @@ public class Monitor implements Serializable {
 	@Column(name = "APELLIDO_2")
 	private String Apellido2;
 	@Column(name = "FECHA_NACIMIENTO")
-	private Date fechaNac;
+	private LocalDate fechaNac;
 	@Column(name = "CORREO")
 	private String Correo;
 	@Column(name = "LOCALIDAD")
@@ -47,7 +47,7 @@ public class Monitor implements Serializable {
 	@Column(name = "OCUPACION")
 	private Cargo cargo;
 	@Column(name = "CURSO")
-	private String curso;
+	private Curso curso;
 	@Column(name = "TIENE_TITULO")
 	private boolean tieneTitulo;
 
@@ -56,9 +56,23 @@ public class Monitor implements Serializable {
 	}
 	
 
-	public Monitor(String dNI, String nombre, String apellido1, String apellido2, Date fechaNac, String correo,
-			String localidad, String codigoPostal, String telFijo, String movil, String telEmergencia1,
-			String telEmergencia2, Cargo ocupacion, String curso, boolean tieneTitulo) {
+	public Monitor(
+			String dNI,
+			String nombre,
+			String apellido1,
+			String apellido2,
+			LocalDate fechaNac,
+			String correo,
+			String localidad,
+			String codigoPostal,
+			String telFijo,
+			String movil,
+			String telEmergencia1,
+			String telEmergencia2,
+			Cargo cargo,
+			Curso curso,
+			boolean tieneTitulo
+			) {
 		super();
 		this.DNI = dNI;
 		this.nombre = nombre;
@@ -72,15 +86,27 @@ public class Monitor implements Serializable {
 		this.Movil = movil;
 		this.telEmergencia1 = telEmergencia1;
 		this.telEmergencia2 = telEmergencia2;
-		this.cargo = ocupacion;
+		this.cargo = cargo;
 		this.curso = curso;
 		this.tieneTitulo = tieneTitulo;
 	}
 
-	public Monitor(String dniMonitor, String nombreMonitor, String primerApellidoMonitor, String segundoApellidoMonitor,
-			LocalDate of, String correoMonitor, String localidadMonitor, String codigoPostalMonitor,
-			String telefonoFijoMonitor, String telefonoMovilMonitor, String telefonoEmergencia1,
-			String telefonoEmergencia2, String ocupacionMonitor, String cursoMonitor, boolean tieneTitulo2) {
+	public Monitor(String dniMonitor,
+			String nombreMonitor,
+			String primerApellidoMonitor,
+			String segundoApellidoMonitor,
+			LocalDate of,
+			String correoMonitor,
+			String localidadMonitor,
+			String codigoPostalMonitor,
+			String telefonoFijoMonitor,
+			String telefonoMovilMonitor,
+			String telefonoEmergencia1,
+			String telefonoEmergencia2,
+			String ocupacionMonitor,
+			String cursoMonitor,
+			boolean tieneTitulo2
+			) {
 		System.out.println("ARREGLAR CONSTRUCTOR");
 	}
 
@@ -117,11 +143,11 @@ public class Monitor implements Serializable {
 		Apellido2 = apellido2;
 	}
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 
-	public void setFechaNac(Date fechaNac) {
+	public void setFechaNac(LocalDate fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 
