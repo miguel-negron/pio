@@ -8,38 +8,40 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
 
+import org.hibernate.query.Query;
+
+import com.gestor.enums.Curso;
+
 public class ConsolaAlumno {
 	private static EntityManager manager;
 	private static EntityManagerFactory enf;
 	
 	private static Scanner sc = new Scanner(System.in);
 	static List<Tutor> listaTutores;
-	private final static Curso[] cursos = Curso.values();
 	private static Alumno alumnoTemporal;
-	private static int respuesta;
-	private static String dniAlumno;
-	private static String nombreAlumno;
-	private static String primerApellidoAlumno;
-	private static String segundoApellidoAlumno;
-	private static String dniTutor;
-	private static int diaFechaNacimiento;
-	private static int mesFechaNacimiento;
-	private static int anioFechaNacimiento;
 
-	ConsolaAlumno(EntityManagerFactory enf) {
-		this.enf = enf;
+	public ConsolaAlumno(EntityManagerFactory enf) {
+		ConsolaAlumno.enf = enf;
 	}
 
 	public int mostrarConsolaAlumno() {
+		int respuesta;
+
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
-					"1: Dar de alta a un alumno. \n2: Dar de baja a un alumno. \n3: Mostrar todos los alumnos. \n4: Modificar los datos de un alumno \n5: Mostrar alumnos por curso elegido. \n6: B�squeda de alumno por DNI. \n7: Volver atr�s."
-							+ "\n0: Finalizar el programa");
+					"1: Dar de alta a un alumno. \n"
+					+ "2: Dar de baja a un alumno. \n"
+					+ "3: Mostrar todos los alumnos. \n"
+					+ "4: Modificar los datos de un alumno \n"
+					+ "5: Mostrar alumnos por curso elegido. \n"
+					+ "6: Busqueda de alumno por DNI. \n"
+					+ "7: Volver atras \n"
+					+ "0: Finalizar el programa");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:
-				finalizarPrograma();
+				finalizarPrograma(respuesta);
 				break;
 			case 1:
 				altaAlumno();
@@ -60,7 +62,7 @@ public class ConsolaAlumno {
 				buscarAlumnoPorDni();
 				break;
 			case 7:
-				retroceder();
+				retroceder(respuesta);
 			}
 		}
 		return respuesta;
@@ -68,6 +70,10 @@ public class ConsolaAlumno {
 
 	// Aqui empieza la funcion insertar
 	public static void altaAlumno() {
+		String dniAlumno;
+		String nombreAlumno;
+		String dniTutor;
+		
 		manager = enf.createEntityManager();
 		System.out.println("Insertamos un alumno por consola.");
 		System.out.println("Introduzca su DNI.");
@@ -85,7 +91,7 @@ public class ConsolaAlumno {
 		if (tutor2 == null) {
 			System.out.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
 		} else {
-			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2, true, true, Curso.colonia);
+			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2, true, true);
 			try {
 				manager.getTransaction().begin();
 				manager.persist(alumnoTemporal);
@@ -125,11 +131,12 @@ public class ConsolaAlumno {
 
 	public static void mostrarAlumnos() {
 		manager = enf.createEntityManager();
-		List<Alumno> lista = manager.createQuery("FROM Alumno").getResultList();
+		List<Alumno> lista = manager.createQuery("FROM Alumno ORDER BY curso").getResultList();
 		
 		if(lista.isEmpty()) {
 			System.out.println("No hay alumnos!");
 		} else {
+			System.out.println("Hay " + lista.size() + "alumnos:");
 			for (Alumno al : lista) {
 				System.out.println(al);
 			}
@@ -137,11 +144,20 @@ public class ConsolaAlumno {
 		manager.close();
 	}
 
-	public static void modificarAlumno() {
+	public static void modificarAlumno() {	
+		final Curso[] cursos = Curso.values();
+		
 		String seguirModificando;
 		boolean bucle = true;
 		boolean seguir = true;
 		String entregado;
+		int diaFechaNacimiento;
+		int mesFechaNacimiento;
+		int anyoFechaNacimiento;
+		String nombreAlumno;
+		String primerApellidoAlumno;
+		String segundoApellidoAlumno;
+		
 		manager = enf.createEntityManager();
 		System.out.println("Introduzca el DNI del alumno que desea modificar");
 		String dniAlumno = sc.next();
@@ -213,9 +229,9 @@ public class ConsolaAlumno {
 					mesFechaNacimiento = sc.nextInt();
 					System.out.println("Escriba el anio.");
 					sc.nextLine();
-					anioFechaNacimiento = sc.nextInt();
+					anyoFechaNacimiento = sc.nextInt();
 					alumnoTemporal
-							.setFechaNac(LocalDate.of(anioFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento));
+							.setFechaNac(LocalDate.of(anyoFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento));
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
@@ -272,46 +288,12 @@ public class ConsolaAlumno {
 					sc.nextLine();
 					int cursoSeleccionado = sc.nextInt();
 					
-					
 					alumnoTemporal.setCurso(cursos[cursoSeleccionado - 1]);
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
 					System.out.println("Curso modificado.");
 					
-					/*
-					switch (cursoSeleccionado) {
-					case 1:
-						alumnoTemporal.setCurso("Pios");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					case 2:
-						alumnoTemporal.setCurso("Devotos");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					case 3:
-						alumnoTemporal.setCurso("Fanaticos");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					case 4:
-						alumnoTemporal.setCurso("Iluminados");
-						manager.getTransaction().begin();
-						manager.persist(alumnoTemporal);
-						manager.getTransaction().commit();
-						System.out.println("Curso modificado.");
-						break;
-					}
-					break;
-					*/
 				}
 				System.out.println("Quieres seguir modificando este Alumno? s/n");
 				seguirModificando = sc.next();
@@ -325,8 +307,8 @@ public class ConsolaAlumno {
 	}
 
 	public static void mostrarAlumnosPorCurso() {
-		int contadorAlumnos = 0;
 		manager = enf.createEntityManager();
+		final Curso[] cursos = Curso.values();
 		
 		//Peticion de curso por consola
 		System.out.println("Seleccione el curso que quiere mostrar:");
@@ -335,48 +317,11 @@ public class ConsolaAlumno {
 		}
 		
 		int curso = sc.nextInt();
+				
 		
-		String hql = "FROM Alumno WHERE Curso = " + cursos[curso - 1];
-		
+		String hql = "FROM Alumno A WHERE A.CURSO = " + cursos[curso - 1];
+	
 		List<Alumno> lista = manager.createQuery(hql).getResultList();
-
-		/*
-		switch (curso) {
-		case 1:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("pios") || al.getCurso().toLowerCase().equals("pios")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		case 2:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("devotos")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		case 3:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("fanaticos")
-						|| al.getCurso().toLowerCase().equals("fanaticos")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		case 4:
-			for (Alumno al : lista) {
-				if (al.getCurso().toLowerCase().equals("iluminados")) {
-					System.out.println(al);
-					contadorAlumnos++;
-				}
-			}
-			break;
-		}
-		*/
 		
 		//Recorremos los resultados con opccion de que no haya nada
 		if (lista.isEmpty()) {
@@ -392,7 +337,7 @@ public class ConsolaAlumno {
 
 	public static void buscarAlumnoPorDni() {
 		System.out.println("Introduzca el DNI del alumno que desea buscar:");
-		dniAlumno = sc.next();
+		String dniAlumno = sc.next();
 		manager = enf.createEntityManager();
 		alumnoTemporal = manager.find(Alumno.class, dniAlumno);
 		if (!(alumnoTemporal == null)) {
@@ -405,13 +350,13 @@ public class ConsolaAlumno {
 	}
 
 	// Funcion para salir del programa
-	public static void finalizarPrograma() {
+	public static void finalizarPrograma(int respuesta) {
 		respuesta = 0;
 	}
 
 	// Funcion retroceder
 	// Nos permite volver al anterior men0
-	public static void retroceder() {
+	public static void retroceder(int respuesta) {
 		respuesta = 9;
 	}
 

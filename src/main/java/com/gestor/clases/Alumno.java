@@ -2,9 +2,6 @@ package com.gestor.clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.gestor.enums.Curso;
 
 @Entity
 @Table(name="ALUMNO")
@@ -41,16 +40,14 @@ public class Alumno implements Serializable{
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
-	private Curso Curso;
+	private Curso curso;
 	
 	public Alumno() {
 		
 	}
 
-
-
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
+			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada) {
 		super();
 		DNI = dni;
 		Nombre = nombre;
@@ -60,9 +57,8 @@ public class Alumno implements Serializable{
 		Tutor = tutor;
 		this.fichaEntregada = fichaEntregada;
 		this.fotoEntregada = fotoEntregada;
-		Curso = curso;
+		this.setCursoAutomatico();
 	}
-
 
 
 	public String getDNI() {
@@ -138,11 +134,30 @@ public class Alumno implements Serializable{
 	}
 
 	public Curso getCurso() {
-		return Curso;
+		return curso;
 	}
 
 	public void setCurso(Curso curso) {
-		Curso = curso;
+		this.curso = curso;
+	}
+	
+	public void setCursoAutomatico() {
+		int edad = LocalDate.now().getYear() - fechaNac.getYear();
+		int edadMin = 17;
+		Curso[] cursos = com.gestor.enums.Curso.values();
+		
+		for (int i = cursos.length - 1; i >= 0; i--) {
+			//System.out.println(i + " ---- " + cursos[i]);
+			//System.out.println(edadMin + "<- min : e ->" + edad);
+			
+			if (edad > edadMin) {
+				this.setCurso(cursos[i]);
+				//System.out.println(this.getCurso());
+				return;
+			} else {
+				edadMin -= 3;
+			}
+		}
 	}
 
 	public static long getSerialversionuid() {
@@ -165,9 +180,15 @@ public class Alumno implements Serializable{
 		} else {
 			estadoFoto = "No entregada";
 		}
-		return "Alumno: " + Nombre +  ", DNI: " + DNI + ", Primer apellido: " + Apellido1 + ", Segundo apellido: " + Apellido2
-				+ ", Fecha de nacimiento: " + fechaNac + ", Tutor=" + Tutor.getNombre() + ", Estado de la ficha: " + estadoFicha
-				+ ", Estado de la foto: " + estadoFoto + ", Curso: " + Curso;
+		return "DNI: " + DNI + "\n\t"
+				+ "Alumno: " + Nombre +  "\n\t"
+				+ "Primer apellido: " + Apellido1 + "\n\t"
+				+ "Segundo apellido: " + Apellido2 + "\n\t"
+				+ "Fecha de nacimiento: " + fechaNac + "\n\t"
+				+ "Tutor: " + Tutor/* .getNombre() */ + "\n\t"
+				+ "Estado de la ficha: " + estadoFicha + "\n\t"
+				+ "Estado de la foto: " + estadoFoto + "\n\t"
+				+ "Curso: " + curso;
 	}
 
 

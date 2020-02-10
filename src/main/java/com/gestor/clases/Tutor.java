@@ -27,15 +27,15 @@ public class Tutor implements Serializable {
 	//Puede que sea otro import(List)
 	private List<Alumno> alumnos = new ArrayList<>();
 	@Column(name="NOMBRE")
-	private String Nombre;
+	private String nombre;
 	@Column(name="APELLIDO_1")
-	private String Apellido1;
+	private String apellido1;
 	@Column(name="APELLIDO_2")
-	private String Apellido2;
+	private String apellido2;
 	@Column(name="DIRECCION")
-	private String Direccion;
+	private String direccion;
 	@Column(name="LOCALIDAD")
-	private String Localidad;
+	private String localidad;
 	@Column(name="CODIGO_POSTAL")
 	private String codigoPostal;
 	@Column(name="TEL_FIJO")
@@ -43,7 +43,7 @@ public class Tutor implements Serializable {
 	@Column(name="TEL_MOVIL")
 	private String telMovil;
 	@Column(name="EMAIL")
-	private String Email;
+	private String email;
 	
 	public Tutor() {
 		
@@ -53,15 +53,15 @@ public class Tutor implements Serializable {
 			String localidad, String codigoPostal, String telFijo, String telMovil, String email) {
 		super();
 		this.DNI = DNI;
-		Nombre = nombre;
-		Apellido1 = apellido1;
-		Apellido2 = apellido2;
-		Direccion = direccion;
-		Localidad = localidad;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.direccion = direccion;
+		this.localidad = localidad;
 		this.codigoPostal = codigoPostal;
 		this.telFijo = telFijo;
 		this.telMovil = telMovil;
-		Email = email;
+		this.email = email;
 	}
 	
 	public void addAlumno(Alumno alumno) {
@@ -87,47 +87,47 @@ public class Tutor implements Serializable {
 	}
 
 	public void setDNI(String dNI) {
-		DNI = dNI;
+		this.DNI = dNI;
 	}
 
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
-		Nombre = nombre;
+		this.nombre = nombre;
 	}
 
 	public String getApellido1() {
-		return Apellido1;
+		return apellido1;
 	}
 
 	public void setApellido1(String apellido1) {
-		Apellido1 = apellido1;
+		this.apellido1 = apellido1;
 	}
 
 	public String getApellido2() {
-		return Apellido2;
+		return apellido2;
 	}
 
 	public void setApellido2(String apellido2) {
-		Apellido2 = apellido2;
+		this.apellido2 = apellido2;
 	}
 
 	public String getDireccion() {
-		return Direccion;
+		return direccion;
 	}
 
 	public void setDireccion(String direccion) {
-		Direccion = direccion;
+		this.direccion = direccion;
 	}
 
 	public String getLocalidad() {
-		return Localidad;
+		return localidad;
 	}
 
 	public void setLocalidad(String localidad) {
-		Localidad = localidad;
+		this.localidad = localidad;
 	}
 
 	public String getCodigoPostal() {
@@ -155,11 +155,11 @@ public class Tutor implements Serializable {
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	public static long getSerialversionuid() {
@@ -168,9 +168,9 @@ public class Tutor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Tutor [DNI=" + DNI + ", Nombre=" + Nombre + ", Apellido1=" + Apellido1 + ", Apellido2=" + Apellido2
-				+ ", Direccion=" + Direccion + ", Localidad=" + Localidad + ", codigoPostal=" + codigoPostal
-				+ ", telFijo=" + telFijo + ", telMovil=" + telMovil + ", Email=" + Email + "]";
+		return "Tutor [DNI=" + DNI + ", Nombre=" + nombre + ", Apellido1=" + apellido1 + ", Apellido2=" + apellido2
+				+ ", Direccion=" + direccion + ", Localidad=" + localidad + ", codigoPostal=" + codigoPostal
+				+ ", telFijo=" + telFijo + ", telMovil=" + telMovil + ", Email=" + email + "]";
 	}
 
 
@@ -178,3 +178,4 @@ public class Tutor implements Serializable {
 	
 
 }
+
