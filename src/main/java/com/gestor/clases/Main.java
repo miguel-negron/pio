@@ -16,22 +16,24 @@ public class Main {
 
 
 	public static void main(String[] args) {
-		//Branch miguel
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
-
+		System.out.println(
+				"===========================\n"
+				+ "    Comienzo de main.    \n"
+				+ "============================"
+				);
 		enf = Persistence.createEntityManagerFactory("Persistencia");
 
 		
 		////TEMPORAL
-		Tutor t = new Tutor("1", "Mateo", "Apell", "Dosque", "C/Urguilla", "Barcelona", "498349J", "4565432",
-				"4309853098", "placeholder@placeholder.ph");
+		Tutor t = new Tutor("1", "Mateo", "Apell", "Dosque", "C/Urguilla", "Barcelona", "498349J", "4565432", "4309853098", "placeholder@placeholder.ph");
 		manager = enf.createEntityManager();
 		manager.getTransaction().begin();
 		manager.persist(t);
 		manager.getTransaction().commit();
 		List<Tutor> listaTutor = manager.createQuery("FROM Tutor").getResultList();
 		for (Tutor tu : listaTutor) {
-			System.out.println(tu);
+			//System.out.println(tu);
 		}
 		manager.close();
 
@@ -61,6 +63,11 @@ public class Main {
 		Consola consola = new Consola(enf);
 		consola.mostrarConsola();
 		
+		System.out.println(
+				"===========================\n"
+				+ "    Fin de main.    \n"
+				+ "============================"
+				);
 	}
 		
 

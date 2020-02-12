@@ -1,6 +1,7 @@
 package com.gestor.clases;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,14 +31,16 @@ public class ConsolaAlumno {
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
-					"1: Dar de alta a un alumno. \n"
+					"\n\n\n"
+					+ "1: Dar de alta a un alumno. \n"
 					+ "2: Dar de baja a un alumno. \n"
 					+ "3: Mostrar todos los alumnos. \n"
 					+ "4: Modificar los datos de un alumno \n"
 					+ "5: Mostrar alumnos por curso elegido. \n"
 					+ "6: Busqueda de alumno por DNI. \n"
 					+ "7: Volver atras \n"
-					+ "0: Finalizar el programa");
+					+ "0: Finalizar el programa"
+					+ "\n\n\n");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:
@@ -309,6 +312,8 @@ public class ConsolaAlumno {
 	public static void mostrarAlumnosPorCurso() {
 		manager = enf.createEntityManager();
 		final Curso[] cursos = Curso.values();
+		List<Alumno> todos;
+		List<Alumno> ninyosDelCurso = new ArrayList<Alumno>();
 		
 		//Peticion de curso por consola
 		System.out.println("Seleccione el curso que quiere mostrar:");
@@ -318,16 +323,24 @@ public class ConsolaAlumno {
 		
 		int curso = sc.nextInt();
 				
+		//query a hibernate
+		String hql = "FROM Alumno";
+		todos = manager.createQuery(hql).getResultList();
 		
-		String hql = "FROM Alumno A WHERE A.CURSO = " + cursos[curso - 1];
-	
-		List<Alumno> lista = manager.createQuery(hql).getResultList();
 		
 		//Recorremos los resultados con opccion de que no haya nada
-		if (lista.isEmpty()) {
+		
+		for (Alumno al : todos) {
+			if (al.getCurso() == cursos[curso - 1]) {
+				ninyosDelCurso.add(al);
+			}
+		}
+		
+		if (ninyosDelCurso.isEmpty()) {
 			System.out.println("No se ha encontrado ningun alumno asignado a ese curso.");
 		} else {
-			for (Alumno al : lista) {
+			System.out.println("Hay " + ninyosDelCurso.size() + " chavales en " + cursos[curso - 1 ] + ": ");
+			for (Alumno al : ninyosDelCurso) {
 				System.out.println(al);
 			}
 		}

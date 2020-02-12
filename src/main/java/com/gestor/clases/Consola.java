@@ -20,9 +20,9 @@ public class Consola {
 		while (respuesta == 9) {
 			System.out.println("Seleccione el apartado que desea administrar.\n"
 					+ "1: Alumnos. \n"
-					+ "4: Tutores. (nada hecho) \n"
 					+ "2: Monitores. \n"
-					+ "3: Lista de espera + Vacantes (No hay nada hecho) "
+					+ "3: Lista de espera + Vacantes (No hay nada hecho)\n "					
+					+ "4: Tutores. (nada hecho) \n"
 					+ "5: Alergias (Nada hecho)"
 					);
 			opcion = sc.nextInt();
