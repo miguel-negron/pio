@@ -16,44 +16,51 @@ public class Vacantes implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "IDCURSO")
-	private int IDCurso;
+	@Column(name = "CURSO")
+	private Curso curso;
 	@Column(name = "VACANTES")
-	private int Vacantes;
+	private int vacantes;
 
-	public Vacantes() {
+	//Constructores
+	public Vacantes() {}
 
+	public Vacantes(Curso curso, int vacantes) {
+		super();
+		this.curso = curso;
+		this.vacantes = vacantes;
 	}
 
-	@Override
-	public String toString() {
-		return "Vacantes [IDCurso=" + IDCurso + ", Vacantes=" + Vacantes + "]";
+	//Auto ++ y --
+	public void anyadeVacante() {
+		this.setVacantes(this.getVacantes() + 1);
+	}
+	
+	public void reduceVacante() {
+		this.setVacantes(this.getVacantes() - 1);
+	}
+	
+	
+	//Getters and Setters
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public int getIDCurso() {
-		return IDCurso;
-	}
-
-	public void setIDCurso(int iDCurso) {
-		IDCurso = iDCurso;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	public int getVacantes() {
-		return Vacantes;
+		return vacantes;
 	}
 
 	public void setVacantes(int vacantes) {
-		Vacantes = vacantes;
+		this.vacantes = vacantes;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Vacantes(int iDCurso, int vacantes) {
-		super();
-		IDCurso = iDCurso;
-		Vacantes = vacantes;
-	}
+	
 
 }

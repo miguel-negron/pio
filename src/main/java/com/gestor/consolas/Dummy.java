@@ -1,6 +1,8 @@
-package com.gestor.clases;
+package com.gestor.consolas;
 
 import java.time.LocalDate;
+
+import com.gestor.clases.Alumno;
 
 public class Dummy {
 

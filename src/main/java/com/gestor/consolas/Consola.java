@@ -1,5 +1,5 @@
 
-package com.gestor.clases;
+package com.gestor.consolas;
 
 import java.util.Scanner;
 
@@ -36,6 +36,9 @@ public class Consola {
 			case 2:
 				ConsolaMonitor cm = new ConsolaMonitor(enf);
 				respuesta = cm.mostrarConsolaMonitor();
+				break;
+			default:
+				System.out.println("solo 1 y 2");
 				break;
 			}
 		}

@@ -1,4 +1,4 @@
-package com.gestor.clases;
+package com.gestor.consolas;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.gestor.clases.Alumno;
+import com.gestor.clases.Tutor;
 
 public class Main {
 

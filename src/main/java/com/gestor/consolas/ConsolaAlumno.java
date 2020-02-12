@@ -1,4 +1,4 @@
-package com.gestor.clases;
+package com.gestor.consolas;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import javax.persistence.RollbackException;
 
 import org.hibernate.query.Query;
 
+import com.gestor.clases.Alumno;
+import com.gestor.clases.Tutor;
 import com.gestor.enums.Curso;
 
 public class ConsolaAlumno {
