@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.RollbackException;
 
 public class ConsolaListaDeEspera {
 	private static EntityManager manager;
