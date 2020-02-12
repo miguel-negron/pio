@@ -327,7 +327,7 @@ public class ConsolaAlumno {
 		String hql = "FROM Alumno";
 		todos = manager.createQuery(hql).getResultList();
 
-		// Recorremos los resultados con opccion de que no haya nada
+		// Recorremos los resultados con opcion de que no haya nada
 
 		for (Alumno al : todos) {
 			if (al.getCurso() == cursos[curso - 1]) {

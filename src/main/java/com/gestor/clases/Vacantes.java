@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.gestor.enums.Curso;
+
 @Entity
 @Table(name = "VACANTES")
 public class Vacantes implements Serializable {
