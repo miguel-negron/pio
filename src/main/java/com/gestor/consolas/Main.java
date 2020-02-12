@@ -8,7 +8,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.gestor.clases.Alumno;
+import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
+import com.gestor.enums.Cargo;
+import com.gestor.enums.Curso;
 
 public class Main {
 
@@ -55,6 +58,18 @@ public class Main {
 		
 		Alumno alumnoTemporal5 = new Alumno("5", "Miguel5", "Negron5", "ElMagnifico5", LocalDate.of(2005, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal5);
+		
+		Monitor monitorTemporal = new Monitor("1", "Roberto", "Cervantes", "kj", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k","k", Cargo.coordinacion, Curso.colonia, true);
+		manager.persist(monitorTemporal);
+		Monitor monitorTemporal2 = new Monitor("2", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.esculta, false);
+		manager.persist(monitorTemporal2);
+		Monitor monitorTemporal3 = new Monitor("3", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.manada, false);
+		manager.persist(monitorTemporal3);
+		Monitor monitorTemporal4 = new Monitor("4", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.manada, false);
+		manager.persist(monitorTemporal4);
+		Monitor monitorTemporal5 = new Monitor("5", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.tropa, false);
+		manager.persist(monitorTemporal5);
+
 
 
 		manager.getTransaction().commit();

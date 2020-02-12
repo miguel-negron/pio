@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.gestor.enums.Cargo;
+import com.gestor.enums.Curso;
 
 @Entity
 @Table(name = "MONITOR")
@@ -90,26 +91,6 @@ public class Monitor implements Serializable {
 		this.curso = curso;
 		this.tieneTitulo = tieneTitulo;
 	}
-
-	public Monitor(String dniMonitor,
-			String nombreMonitor,
-			String primerApellidoMonitor,
-			String segundoApellidoMonitor,
-			LocalDate of,
-			String correoMonitor,
-			String localidadMonitor,
-			String codigoPostalMonitor,
-			String telefonoFijoMonitor,
-			String telefonoMovilMonitor,
-			String telefonoEmergencia1,
-			String telefonoEmergencia2,
-			String ocupacionMonitor,
-			String cursoMonitor,
-			boolean tieneTitulo2
-			) {
-		System.out.println("ARREGLAR CONSTRUCTOR");
-	}
-
 
 	public String getDNI() {
 		return DNI;
@@ -221,10 +202,46 @@ public class Monitor implements Serializable {
 	
 	@Override
 	public String toString() {
+		String entrega;
+		if(tieneTitulo) {
+			entrega = "Tiene.";
+		} else {
+			entrega = "No tiene.";
+		}
 		return "Monitor [DNI=" + DNI + ", Nombre=" + nombre + ", Apellido1=" + apellido1 + ", Apellido2=" + Apellido2
 				+ ", fechaNac=" + fechaNac + ", Correo=" + Correo + ", Localidad=" + Localidad + ", codigoPostal="
 				+ codigoPostal + ", telFijo=" + telFijo + ", Movil=" + Movil + ", telEmergencia1=" + telEmergencia1
-				+ ", telEmergencia2=" + telEmergencia2 + ", Ocupacion=" + cargo + "]";
+				+ ", telEmergencia2=" + telEmergencia2 + ", Ocupacion=" + cargo + ", Curso= " + curso + "Certificado: " + entrega ;
+	}
+
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+
+	public boolean isTieneTitulo() {
+		return tieneTitulo;
+	}
+
+
+	public void setTieneTitulo(boolean tieneTitulo) {
+		this.tieneTitulo = tieneTitulo;
 	}
 
 

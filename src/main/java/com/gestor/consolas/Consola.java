@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import javax.persistence.EntityManagerFactory;
 
-
 public class Consola {
 	private static Scanner sc = new Scanner(System.in);
 	private static EntityManagerFactory enf;

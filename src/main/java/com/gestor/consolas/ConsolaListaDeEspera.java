@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.RollbackException;
 
 import com.gestor.clases.Alumno;
 import com.gestor.clases.AlumnoEnEspera;
