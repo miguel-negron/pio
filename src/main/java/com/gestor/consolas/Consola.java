@@ -37,8 +37,12 @@ public class Consola {
 				ConsolaMonitor cm = new ConsolaMonitor(enf);
 				respuesta = cm.mostrarConsolaMonitor();
 				break;
+			case 3:
+				ConsolaListaDeEspera clde = new ConsolaListaDeEspera(enf);
+				respuesta = clde.mostrarConsolaLista();
+				break;
 			default:
-				System.out.println("solo 1 y 2");
+				System.out.println("solo 1 y 2 y 3");
 				break;
 			}
 		}
