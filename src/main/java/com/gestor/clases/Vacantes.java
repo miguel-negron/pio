@@ -17,6 +17,14 @@ public class Vacantes implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public int getLimite() {
+		return limite;
+	}
+
+	public void setLimite(int limite) {
+		this.limite = limite;
+	}
+
 	@Id
 	@Column(name = "CURSO")
 	private Curso curso;

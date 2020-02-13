@@ -21,9 +21,8 @@ public class Consola {
 					+ "1: Alumnos. \n"
 					+ "2: Monitores. \n"
 					+ "3: Lista de espera (No hay nada hecho)\n"					
-					+ "4: Tutores. (nada hecho) \n"
-					+ "5: Alergias (Nada hecho) \n"
-					+ "6: Vacantes"
+					+ "4: Alergias (Nada hecho) \n"
+					+ "5: Vacantes"
 					);
 			opcion = sc.nextInt();
 			
@@ -44,7 +43,7 @@ public class Consola {
 				ConsolaListaDeEspera clde = new ConsolaListaDeEspera(enf);
 				respuesta = clde.mostrarConsolaLista();
 				break;
-			case 6:
+			case 5:
 				ConsolaVacantes cv = new ConsolaVacantes(enf);
 				respuesta = cv.mostrarConsolaVacante();
 				break;
