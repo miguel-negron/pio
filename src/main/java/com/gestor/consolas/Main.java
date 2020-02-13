@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import com.gestor.clases.Alumno;
 import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
+import com.gestor.clases.Vacantes;
 import com.gestor.enums.Cargo;
 import com.gestor.enums.Curso;
 
@@ -43,6 +44,17 @@ public class Main {
 
 		manager = enf.createEntityManager();
 		manager.getTransaction().begin();
+		
+		Vacantes vacante1 = new Vacantes(Curso.colonia, 0, 5);
+		manager.persist(vacante1);
+		Vacantes vacante2 = new Vacantes(Curso.manada, 0, 5);
+		manager.persist(vacante2);
+		Vacantes vacante3 = new Vacantes(Curso.tropa, 0, 5);
+		manager.persist(vacante3);
+		Vacantes vacante4 = new Vacantes(Curso.esculta, 0, 5);
+		manager.persist(vacante4);
+		Vacantes vacante5 = new Vacantes(Curso.clan, 0, 5);
+		manager.persist(vacante5);
 		
 		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal);

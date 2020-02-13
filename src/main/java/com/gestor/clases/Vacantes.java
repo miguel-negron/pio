@@ -22,14 +22,17 @@ public class Vacantes implements Serializable {
 	private Curso curso;
 	@Column(name = "VACANTES")
 	private int vacantes;
+	@Column(name = "LIMITE")
+	private int limite;
 
 	//Constructores
 	public Vacantes() {}
 
-	public Vacantes(Curso curso, int vacantes) {
+	public Vacantes(Curso curso, int vacantes, int limite) {
 		super();
 		this.curso = curso;
 		this.vacantes = vacantes;
+		this.limite = limite;
 	}
 
 	//Auto ++ y --
@@ -61,6 +64,11 @@ public class Vacantes implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	@Override
+	public String toString() {
+		return "Vacantes: curso=" + curso + ", vacantes=" + vacantes + ", limite= " + limite + ".";
 	}
 
 	

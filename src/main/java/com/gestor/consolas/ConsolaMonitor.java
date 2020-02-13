@@ -43,7 +43,7 @@ public class ConsolaMonitor {
 				mostrarMonitores();
 				break;
 			case 4:
-
+				modificarMonitor();
 				break;
 			case 5:
 				buscarMonitorPorDni();
@@ -267,6 +267,237 @@ public class ConsolaMonitor {
 		} else {
 			System.out.println("¡No hay monitores!");
 		}
+	}
+	
+	public static void modificarMonitor() {
+		final Curso [] cursos = Curso.values();
+		Monitor monitorTemporal;
+				String seguirModificando;
+				boolean bucle = true;
+				boolean seguir =  true;
+				String entregado;
+				int diaFechaNacimiento;
+				int mesFechaNacimiento;
+				int anyoFechaNacimiento;
+				String nombreMonitor;
+				String primerApellidoMonitor;
+				String segundoApellidoMonitor;
+				LocalDate fechaNac;
+				String correoMonitor;
+				String localidadMonitor;
+				String codigoPostalMonitor;
+				String telefonoFijoMonitor;
+				String telefonoMovilMonitor;
+				String telefonoEmergencia1;
+				String telefonoEmergencia2;
+				String ocupacionMonitor;
+				String cursoMonitor;
+				boolean tieneTitulo2;
+				
+				manager = enf.createEntityManager();
+				System.out.println("Introduzca el Dni del monitor que desea modificar");
+				String dniMonitor = sc.next();
+				sc.nextLine();
+				monitorTemporal = manager.find(Monitor.class, dniMonitor);
+				if (monitorTemporal == null) {
+					System.out.println("No se ha encontrado el monitor introducido.");
+				} else {
+					System.out.println("Monitor encontrado!");
+					while(seguir) {
+						System.out.println("Monitor a modificar: "+ monitorTemporal );
+						System.out.println("Seleccione que desea modificar:\n0:Dni.\n1:Nombre.\n2:Primer apellido.\n3:Segundo apellido.\n4:Fecha de nacimiento.\n5:Correo electrónico.\n6:Localidad.\n7:Código postal.\n8:Teléfono fijo.\n9:Teléfono móvil.\n10:Teléfono de emergencia 1.\n11:Teléfono de emergencia 2.\n12:Ocupación.\n13:Curso.\n14:Título.\n15:Retroceder.");
+						int opcion = sc.nextInt();
+						switch(opcion) {
+						case 0:
+							System.out.println("Introduzca el nuevo DNI.");
+							sc.nextLine();
+							dniMonitor = sc.next();
+							// Borramos el alumno y lo creamos de nuevo con el nuevo DNI (no se pueden
+							// cambiar claves primarias)
+							manager.getTransaction().begin();
+							manager.merge(monitorTemporal);
+							manager.remove(monitorTemporal);
+							manager.getTransaction().commit();
+							monitorTemporal.setDNI(dniMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Dni modificado.");
+							break;
+						case 1:
+							System.out.println("Escriba el nuevo nombre.");
+							sc.nextLine();
+							nombreMonitor = sc.next();
+							monitorTemporal.setNombre(nombreMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Nombre modificado.");
+							break;
+						case 2:
+							System.out.println("Escriba el primer apellido.");
+							sc.nextLine();
+							primerApellidoMonitor = sc.next();
+							monitorTemporal.setApellido1(primerApellidoMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Apellido modificado.");
+							break;
+						case 3:
+							System.out.println("Escriba el segundo apellido.");
+							sc.nextLine();
+							segundoApellidoMonitor = sc.next();
+							monitorTemporal.setApellido2(segundoApellidoMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Apellido modificado.");
+							break;
+						case 4:
+							System.out.println("Escriba el dia.");
+							sc.nextLine();
+							diaFechaNacimiento = sc.nextInt();
+							System.out.println("Escriba el mes.");
+							sc.nextLine();
+							mesFechaNacimiento = sc.nextInt();
+							System.out.println("Escriba el anio.");
+							sc.nextLine();
+							anyoFechaNacimiento = sc.nextInt();
+							monitorTemporal
+									.setFechaNac(LocalDate.of(anyoFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento));
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Fecha de nacimiento modificada.");
+							break;
+						case 5:
+							System.out.println("Escriba el correo.");
+							sc.nextLine();
+							correoMonitor = sc.next();
+							monitorTemporal.setCorreo(correoMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Correo modificado.");
+							break;
+						case 6:
+							System.out.println("Introduzca la nueva localidad");
+							sc.hasNextLine();
+							localidadMonitor = sc.next();
+							monitorTemporal.setLocalidad(localidadMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Correo modificado.");
+							break;
+						case 7:
+							System.out.println("Introduzca el nuevo código postal");
+							sc.nextLine();
+							codigoPostalMonitor = sc.next();
+							monitorTemporal.setCodigoPostal(codigoPostalMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Código postal modificado");
+							break;
+						case 8:
+							System.out.println("Introduce el nuevo teléfono fijo");
+							sc.nextLine();
+							telefonoFijoMonitor = sc.next();
+							monitorTemporal.setTelFijo(telefonoFijoMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Teléfono fijo modificado");
+							break;
+						case 9:
+							System.out.println("Introduce el nuevo teléfono móvil");
+							sc.nextLine();
+							telefonoMovilMonitor = sc.next();
+							monitorTemporal.setMovil(telefonoMovilMonitor);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Teléfono móvil modificado");
+							break;
+						case 10:
+							System.out.println("Introduce el primer teléfono de emergencia");
+							sc.nextLine();
+							telefonoEmergencia1 = sc.next();
+							monitorTemporal.setTelEmergencia1(telefonoEmergencia1);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Teléfono de emergencia 1 modificado");
+							break;
+						case 11:
+							System.out.println("Introduce el segundo teléfono de emergencia");
+							sc.nextLine();
+							telefonoEmergencia2 = sc.next();
+							monitorTemporal.setTelEmergencia2(telefonoEmergencia2);
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Teléfono de emergencia 2 modificado");
+							break;
+						case 12:
+							System.out.println("Introduce la nueva ocupación");
+							sc.nextLine();
+							ocupacionMonitor = sc.next();
+							monitorTemporal.setCargo(Cargo.valueOf(ocupacionMonitor));;
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Cargo modificado");
+							break;
+						case 13:
+							System.out.println("Introduce el nuevo curso");
+							sc.nextLine();
+							cursoMonitor = sc.next();
+							monitorTemporal.setCurso(Curso.valueOf(cursoMonitor));
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Curso modificado");
+							break;
+						case 14:
+							System.out.println("Tiene titulo? S/N");
+							bucle = true;
+							while (bucle) {
+								sc.nextLine();
+								entregado = sc.next();
+								if (entregado.toLowerCase().equals("s")) {
+									monitorTemporal.setTieneTitulo(true);;
+									bucle = false;
+								} else if (entregado.toLowerCase().equals("n")) {
+									monitorTemporal.setTieneTitulo(false);
+									bucle = false;
+								} else {
+									System.out.println("Entrada incorrecta, por favor escriba S o N.");
+
+								}
+							}
+							manager.getTransaction().begin();
+							manager.persist(monitorTemporal);
+							manager.getTransaction().commit();
+							System.out.println("Entrega modificada.");
+							break;
+							
+						case 15:
+							seguir = false;
+							break;
+							
+							
+							
+						}
+						
+						
+					}
+				}
+				
+				
+		
 	}
 
 	// Funcion para salir del programa

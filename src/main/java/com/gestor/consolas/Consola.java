@@ -21,9 +21,10 @@ public class Consola {
 			System.out.println("Seleccione el apartado que desea administrar.\n"
 					+ "1: Alumnos. \n"
 					+ "2: Monitores. \n"
-					+ "3: Lista de espera + Vacantes (No hay nada hecho)\n "					
+					+ "3: Lista de espera (No hay nada hecho)\n"					
 					+ "4: Tutores. (nada hecho) \n"
-					+ "5: Alergias (Nada hecho)"
+					+ "5: Alergias (Nada hecho) \n"
+					+ "6: Vacantes"
 					);
 			opcion = sc.nextInt();
 			
@@ -38,7 +39,11 @@ public class Consola {
 				respuesta = cm.mostrarConsolaMonitor();
 				break;
 			default:
-				System.out.println("solo 1 y 2");
+				System.out.println("solo 1 y 2 y 6");
+				break;
+			case 6:
+				ConsolaVacantes cv = new ConsolaVacantes(enf);
+				respuesta = cv.mostrarConsolaVacante();
 				break;
 			}
 		}
