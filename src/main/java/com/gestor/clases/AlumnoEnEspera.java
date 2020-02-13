@@ -165,5 +165,19 @@ public class AlumnoEnEspera implements Serializable {
 	public void setInfoAdicional(String infoAdicional) {
 		this.infoAdicional = infoAdicional;
 	}
+
+	@Override
+	public String toString() {
+		return "dni=" + dni + "\n"
+				+ "\tnombre=" + nombre + "\n"
+				+ "\tfechaNac=" + fechaNac + "\n"
+				+ "\tcurso=" + curso + "\n"
+				+ "\tfectaEntrada=" + fectaEntrada + "\n"
+				+ "\tdniTutor=" + dniTutor + "\n"
+				+ "\tnombreTutor=" + nombreTutor + "\n"
+				+ "\ttelContacto=" + telContacto + "\n"
+				+ "\temailContacto=" + emailContacto + "\n"
+				+ "\tinfoAdicional=" + infoAdicional;
+	}
 	
 }

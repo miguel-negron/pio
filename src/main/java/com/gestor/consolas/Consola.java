@@ -2,7 +2,6 @@
 package com.gestor.consolas;
 
 import java.util.Scanner;
-
 import javax.persistence.EntityManagerFactory;
 
 
@@ -41,6 +40,10 @@ public class Consola {
 			default:
 				System.out.println("solo 1 y 2 y 6");
 				break;
+			case 3:
+				ConsolaListaDeEspera clde = new ConsolaListaDeEspera(enf);
+				respuesta = clde.mostrarConsolaLista();
+				break;
 			case 6:
 				ConsolaVacantes cv = new ConsolaVacantes(enf);
 				respuesta = cv.mostrarConsolaVacante();
@@ -48,6 +51,7 @@ public class Consola {
 			}
 		}
 		System.out.println("Programa finalizado.");
-	}
+	
+}
 }
 
