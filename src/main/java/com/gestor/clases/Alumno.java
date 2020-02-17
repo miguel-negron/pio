@@ -2,13 +2,18 @@ package com.gestor.clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 
 import com.gestor.enums.Curso;
 
@@ -41,6 +46,8 @@ public class Alumno implements Serializable{
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
 	private Curso curso;
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
 	public Alumno() {
 		
@@ -160,6 +167,20 @@ public class Alumno implements Serializable{
 		}
 	}
 
+	public List<Alergia> getAlergias() {
+		return alergias;
+	}
+	
+	public void addAlergia(Alergia alergia) {
+		this.alergias.add(alergia);
+		alergia.getAlumnosAlergicos().add(this);
+	}
+	
+	public void removeAlergia(Alergia alergia) {
+		this.alergias.remove(alergia);
+		alergia.getAlumnosAlergicos().remove(this);
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -185,13 +206,11 @@ public class Alumno implements Serializable{
 				+ "Primer apellido: " + Apellido1 + "\n\t"
 				+ "Segundo apellido: " + Apellido2 + "\n\t"
 				+ "Fecha de nacimiento: " + fechaNac + "\n\t"
-				+ "Tutor: " + Tutor/* .getNombre() */ + "\n\t"
+				+ "Tutor: " + Tutor.getNombre()  + "\n\t"
 				+ "Estado de la ficha: " + estadoFicha + "\n\t"
 				+ "Estado de la foto: " + estadoFoto + "\n\t"
 				+ "Curso: " + curso;
 	}
-
-
 
 	public Tutor getTutor() {
 		return Tutor;
@@ -200,12 +219,5 @@ public class Alumno implements Serializable{
 	public void setTutor(Tutor tutor) {
 		Tutor = tutor;
 	}
-
-
-
-	
-
-	
-	
 
 }

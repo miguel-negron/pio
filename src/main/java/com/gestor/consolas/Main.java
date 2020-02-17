@@ -7,10 +7,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.gestor.clases.Alergia;
 import com.gestor.clases.Alumno;
 import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
 import com.gestor.clases.Vacantes;
+import com.gestor.enums.Alergeno;
 import com.gestor.enums.Cargo;
 import com.gestor.enums.Curso;
 
@@ -83,6 +85,10 @@ public class Main {
 		manager.persist(monitorTemporal5);
 
 
+		for (int i = 0; i < Alergeno.values().length; i++) {
+			manager.persist(new Alergia(Alergeno.values()[i]));
+			System.out.println(Alergeno.values()[i]);
+		}
 
 		manager.getTransaction().commit();
 		manager.close();
