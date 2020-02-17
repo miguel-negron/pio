@@ -84,28 +84,28 @@ public class ConsolaListaDeEspera {
 		
 		System.out.println("Introduzca los datos del Alumno");
 		
-		System.out.println("Introduzca su DNI. [1/8]");
+		System.out.println("Introduzca su DNI.");
 		dni = sc.nextLine();
 	
-		System.out.println("Introduzca su nombre.[2/8]");
+		System.out.println("Introduzca su nombre.");
 		nombre = sc.nextLine();
 
-		System.out.println("Introduzca el dni de su tutor.[4/8]");
+		System.out.println("Introduzca el dni de su tutor.");
 		dniTutor = sc.nextLine();
 
-		System.out.println("Introduzca el nombre de su tutor.[5/8]");
+		System.out.println("Introduzca el nombre de su tutor.");
 		nombreTutor = sc.nextLine();
 		
-		System.out.println("Introduzca un telefono de contacto.[6/8]");
+		System.out.println("Introduzca un telefono de contacto.");
 		telContacto = sc.nextLine();
 
-		System.out.println("Introduzca un email de contacto.[7/8]");
+		System.out.println("Introduzca un email de contacto.");
 		emailContacto = sc.nextLine();
 
-		System.out.println("Introduzca datos adicionales.[8/8]");
+		System.out.println("Introduzca datos adicionales.");
 		infoAdicional = sc.nextLine();
 		
-		System.out.println("Introduzca su fecha de nacimiento.[3/8]");
+		System.out.println("Introduzca su fecha de nacimiento.");
 		
 		System.out.println("Escriba el dia. [dd]/mm/aaaa");
 		sc.nextLine();
@@ -132,7 +132,6 @@ public class ConsolaListaDeEspera {
 	public static void mostrarAlumnosLista() {
 		manager = emf.createEntityManager();
 		List<AlumnoEnEspera> lista = manager.createQuery("FROM LISTA_DE_ESPERA ORDER BY curso").getResultList();
-		
 		if(lista.isEmpty()) {
 			System.out.println("No hay alumnos!");
 		} else {

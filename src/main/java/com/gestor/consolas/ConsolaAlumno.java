@@ -12,6 +12,7 @@ import javax.persistence.RollbackException;
 import org.hibernate.query.Query;
 
 import com.gestor.clases.Alumno;
+import com.gestor.clases.CursoAlumnos;
 import com.gestor.clases.Tutor;
 import com.gestor.enums.Curso;
 
@@ -133,7 +134,7 @@ public class ConsolaAlumno {
 
 	public static void mostrarAlumnos() {
 		manager = enf.createEntityManager();
-		List<Alumno> lista = manager.createQuery("FROM Alumno ORDER BY curso").getResultList();
+		List<Alumno> lista = manager.createQuery("FROM Alumno").getResultList();
 
 		if (lista.isEmpty()) {
 			System.out.println("No hay alumnos!");
@@ -291,7 +292,7 @@ public class ConsolaAlumno {
 					sc.nextLine();
 					int cursoSeleccionado = sc.nextInt();
 
-					alumnoTemporal.setCurso(cursos[cursoSeleccionado - 1]);
+					alumnoTemporal.setCursoAlumnos(manager.find(CursoAlumnos.class, cursos[cursoSeleccionado - 1]));
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
@@ -330,7 +331,7 @@ public class ConsolaAlumno {
 		// Recorremos los resultados con opcion de que no haya nada
 
 		for (Alumno al : todos) {
-			if (al.getCurso() == cursos[curso - 1]) {
+			if (al.getCurso() == manager.find(CursoAlumnos.class, cursos[curso - 1])) {
 				ninyosDelCurso.add(al);
 			}
 		}

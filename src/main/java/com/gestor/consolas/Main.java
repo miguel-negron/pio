@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 
 import com.gestor.clases.Alergia;
 import com.gestor.clases.Alumno;
+import com.gestor.clases.CursoAlumnos;
 import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
 import com.gestor.clases.Vacantes;
@@ -47,7 +48,7 @@ public class Main {
 		manager = enf.createEntityManager();
 		manager.getTransaction().begin();
 		
-		Vacantes vacante1 = new Vacantes(Curso.colonia, 0, 5);
+		/*Vacantes vacante1 = new Vacantes(Curso.colonia, 0, 5);
 		manager.persist(vacante1);
 		Vacantes vacante2 = new Vacantes(Curso.manada, 0, 5);
 		manager.persist(vacante2);
@@ -56,7 +57,7 @@ public class Main {
 		Vacantes vacante4 = new Vacantes(Curso.esculta, 0, 5);
 		manager.persist(vacante4);
 		Vacantes vacante5 = new Vacantes(Curso.clan, 0, 5);
-		manager.persist(vacante5);
+		manager.persist(vacante5);*/
 		
 		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal);
@@ -88,6 +89,11 @@ public class Main {
 		for (int i = 0; i < Alergeno.values().length; i++) {
 			manager.persist(new Alergia(Alergeno.values()[i]));
 			System.out.println(Alergeno.values()[i]);
+		}
+		
+		for (int i = 0; i < Curso.values().length; i++) {
+			manager.persist(new CursoAlumnos(Curso.values()[i]));
+			System.out.println(Curso.values()[i]);
 		}
 
 		manager.getTransaction().commit();

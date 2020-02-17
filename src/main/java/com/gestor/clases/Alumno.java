@@ -14,7 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import com.gestor.enums.Curso;
 
 @Entity
@@ -44,8 +43,8 @@ public class Alumno implements Serializable{
 	private boolean fichaEntregada;
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
-	@Column(name="CURSO")
-	private Curso curso;
+	@ManyToOne
+	private CursoAlumnos curso;
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
@@ -140,12 +139,13 @@ public class Alumno implements Serializable{
 		this.fotoEntregada = fotoEntregada;
 	}
 
-	public Curso getCurso() {
+	public CursoAlumnos getCurso() {
 		return curso;
 	}
 
-	public void setCurso(Curso curso) {
+	public void setCursoAlumnos(CursoAlumnos curso) {
 		this.curso = curso;
+		curso.addAlumno(this);
 	}
 	
 	public void setCursoAutomatico() {
@@ -158,7 +158,7 @@ public class Alumno implements Serializable{
 			//System.out.println(edadMin + "<- min : e ->" + edad);
 			
 			if (edad > edadMin) {
-				this.setCurso(cursos[i]);
+				//this.setCursoAlumnos(cursos[i]);
 				//System.out.println(this.getCurso());
 				return;
 			} else {
