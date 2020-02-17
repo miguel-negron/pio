@@ -185,7 +185,7 @@ public class Alumno implements Serializable{
 				+ "Primer apellido: " + Apellido1 + "\n\t"
 				+ "Segundo apellido: " + Apellido2 + "\n\t"
 				+ "Fecha de nacimiento: " + fechaNac + "\n\t"
-				+ "Tutor: " + Tutor/* .getNombre() */ + "\n\t"
+				+ "Tutor: " + Tutor.getNombre() + "\n\t"
 				+ "Estado de la ficha: " + estadoFicha + "\n\t"
 				+ "Estado de la foto: " + estadoFoto + "\n\t"
 				+ "Curso: " + curso;

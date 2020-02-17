@@ -27,7 +27,7 @@ public class ConsolaListaDeEspera {
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
 					"\n\n\n"
-					+ "1: Dar de alta a un alumno. \n"
+					+ "1: Dar de alta a un alumno. \n" //Meter en ConsolaAlumno
 					//+ "2: Dar de baja a un alumno. \n"
 					+ "3: Mostrar todos los alumnos. \n"
 					+ "4: Modificar los datos de un alumno \n"
