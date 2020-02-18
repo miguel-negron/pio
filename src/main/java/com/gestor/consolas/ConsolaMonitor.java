@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 
 import com.gestor.clases.Monitor;
 import com.gestor.enums.Cargo;
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 public class ConsolaMonitor {
 	private static EntityManager manager;
@@ -80,9 +80,9 @@ public class ConsolaMonitor {
 		String telefonoEmergencia1;
 		String telefonoEmergencia2;
 		Cargo cargoMonitor;
-		Curso cursoMonitor;
+		NombreCurso cursoMonitor;
 		boolean tieneTitulo = false;
-		Curso[] cursos = Curso.values();
+		NombreCurso[] cursos = NombreCurso.values();
 		Cargo[] cargos = Cargo.values();
 		boolean bucle = true;
 		String entregado;
@@ -133,7 +133,7 @@ public class ConsolaMonitor {
 		sc.nextLine();
 		int cursoSeleccionado = sc.nextInt();
 		cursoMonitor = cursos[cursoSeleccionado - 1];
-		System.out.println("¿Tiene titulo?s/n");
+		System.out.println("ï¿½Tiene titulo?s/n");
 		while (bucle) {
 			sc.nextLine();
 			entregado = sc.next();
@@ -222,12 +222,12 @@ public class ConsolaMonitor {
 	}
 
 	public void mostrarMonitoresPorCurso() {
-		final Curso[] cursos = Curso.values();
+		final NombreCurso[] cursos = NombreCurso.values();
 		List<Monitor> listaMonitores;
 		List<Monitor> monitoresDelCurso = new ArrayList<Monitor>();
 		manager = enf.createEntityManager();
 		listaMonitores = manager.createQuery("FROM Monitor ORDER BY curso").getResultList();
-		for (int curso = 0; curso < Curso.values().length; curso++) {
+		for (int curso = 0; curso < NombreCurso.values().length; curso++) {
 			monitoresDelCurso.clear();
 			for (Monitor m : listaMonitores) {
 				if (m.getCurso() == cursos[curso]) {
@@ -265,12 +265,12 @@ public class ConsolaMonitor {
 			}
 			System.out.println("Total: " + contador + " monitores.");
 		} else {
-			System.out.println("¡No hay monitores!");
+			System.out.println("ï¿½No hay monitores!");
 		}
 	}
 	
 	public static void modificarMonitor() {
-		final Curso [] cursos = Curso.values();
+		final NombreCurso [] cursos = NombreCurso.values();
 		Monitor monitorTemporal;
 				String seguirModificando;
 				boolean bucle = true;
@@ -305,7 +305,7 @@ public class ConsolaMonitor {
 					System.out.println("Monitor encontrado!");
 					while(seguir) {
 						System.out.println("Monitor a modificar: "+ monitorTemporal );
-						System.out.println("Seleccione que desea modificar:\n0:Dni.\n1:Nombre.\n2:Primer apellido.\n3:Segundo apellido.\n4:Fecha de nacimiento.\n5:Correo electrónico.\n6:Localidad.\n7:Código postal.\n8:Teléfono fijo.\n9:Teléfono móvil.\n10:Teléfono de emergencia 1.\n11:Teléfono de emergencia 2.\n12:Ocupación.\n13:Curso.\n14:Título.\n15:Retroceder.");
+						System.out.println("Seleccione que desea modificar:\n0:Dni.\n1:Nombre.\n2:Primer apellido.\n3:Segundo apellido.\n4:Fecha de nacimiento.\n5:Correo electrï¿½nico.\n6:Localidad.\n7:Cï¿½digo postal.\n8:Telï¿½fono fijo.\n9:Telï¿½fono mï¿½vil.\n10:Telï¿½fono de emergencia 1.\n11:Telï¿½fono de emergencia 2.\n12:Ocupaciï¿½n.\n13:Curso.\n14:Tï¿½tulo.\n15:Retroceder.");
 						int opcion = sc.nextInt();
 						switch(opcion) {
 						case 0:
@@ -392,57 +392,57 @@ public class ConsolaMonitor {
 							System.out.println("Correo modificado.");
 							break;
 						case 7:
-							System.out.println("Introduzca el nuevo código postal");
+							System.out.println("Introduzca el nuevo cï¿½digo postal");
 							sc.nextLine();
 							codigoPostalMonitor = sc.next();
 							monitorTemporal.setCodigoPostal(codigoPostalMonitor);
 							manager.getTransaction().begin();
 							manager.persist(monitorTemporal);
 							manager.getTransaction().commit();
-							System.out.println("Código postal modificado");
+							System.out.println("Cï¿½digo postal modificado");
 							break;
 						case 8:
-							System.out.println("Introduce el nuevo teléfono fijo");
+							System.out.println("Introduce el nuevo telï¿½fono fijo");
 							sc.nextLine();
 							telefonoFijoMonitor = sc.next();
 							monitorTemporal.setTelFijo(telefonoFijoMonitor);
 							manager.getTransaction().begin();
 							manager.persist(monitorTemporal);
 							manager.getTransaction().commit();
-							System.out.println("Teléfono fijo modificado");
+							System.out.println("Telï¿½fono fijo modificado");
 							break;
 						case 9:
-							System.out.println("Introduce el nuevo teléfono móvil");
+							System.out.println("Introduce el nuevo telï¿½fono mï¿½vil");
 							sc.nextLine();
 							telefonoMovilMonitor = sc.next();
 							monitorTemporal.setMovil(telefonoMovilMonitor);
 							manager.getTransaction().begin();
 							manager.persist(monitorTemporal);
 							manager.getTransaction().commit();
-							System.out.println("Teléfono móvil modificado");
+							System.out.println("Telï¿½fono mï¿½vil modificado");
 							break;
 						case 10:
-							System.out.println("Introduce el primer teléfono de emergencia");
+							System.out.println("Introduce el primer telï¿½fono de emergencia");
 							sc.nextLine();
 							telefonoEmergencia1 = sc.next();
 							monitorTemporal.setTelEmergencia1(telefonoEmergencia1);
 							manager.getTransaction().begin();
 							manager.persist(monitorTemporal);
 							manager.getTransaction().commit();
-							System.out.println("Teléfono de emergencia 1 modificado");
+							System.out.println("Telï¿½fono de emergencia 1 modificado");
 							break;
 						case 11:
-							System.out.println("Introduce el segundo teléfono de emergencia");
+							System.out.println("Introduce el segundo telï¿½fono de emergencia");
 							sc.nextLine();
 							telefonoEmergencia2 = sc.next();
 							monitorTemporal.setTelEmergencia2(telefonoEmergencia2);
 							manager.getTransaction().begin();
 							manager.persist(monitorTemporal);
 							manager.getTransaction().commit();
-							System.out.println("Teléfono de emergencia 2 modificado");
+							System.out.println("Telï¿½fono de emergencia 2 modificado");
 							break;
 						case 12:
-							System.out.println("Introduce la nueva ocupación");
+							System.out.println("Introduce la nueva ocupaciï¿½n");
 							sc.nextLine();
 							ocupacionMonitor = sc.next();
 							monitorTemporal.setCargo(Cargo.valueOf(ocupacionMonitor));;
@@ -455,7 +455,7 @@ public class ConsolaMonitor {
 							System.out.println("Introduce el nuevo curso");
 							sc.nextLine();
 							cursoMonitor = sc.next();
-							monitorTemporal.setCurso(Curso.valueOf(cursoMonitor));
+							monitorTemporal.setCurso(NombreCurso.valueOf(cursoMonitor));
 							manager.getTransaction().begin();
 							manager.persist(monitorTemporal);
 							manager.getTransaction().commit();

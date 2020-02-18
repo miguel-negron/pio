@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 @Entity
 @Table(name = "LISTA_DE_ESPERA")
@@ -25,7 +25,7 @@ public class AlumnoEnEspera implements Serializable {
 	@Column(name = "FECHA_NACIMIENTO")
 	private LocalDate fechaNac;
 	@Column(name = "CURSO")
-	private Curso curso;
+	private NombreCurso curso;
 	@Column(name = "ENTRADA")
 	private LocalDate fectaEntrada;
 	
@@ -70,7 +70,7 @@ public class AlumnoEnEspera implements Serializable {
 	public void setCursoAutomatico() {
 		int edad = LocalDate.now().getYear() - fechaNac.getYear();
 		int edadMin = 17;
-		Curso[] cursos = com.gestor.enums.Curso.values();
+		NombreCurso[] cursos = com.gestor.enums.NombreCurso.values();
 		
 		for (int i = cursos.length - 1; i >= 0; i--) {
 			//System.out.println(i + " ---- " + cursos[i]);
@@ -110,11 +110,11 @@ public class AlumnoEnEspera implements Serializable {
 		this.fechaNac = fechaNac;
 	}
 
-	public Curso getCurso() {
+	public NombreCurso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(Curso cursos) {
+	public void setCurso(NombreCurso cursos) {
 		this.curso = cursos;
 	}
 

@@ -12,9 +12,9 @@ import javax.persistence.RollbackException;
 import org.hibernate.query.Query;
 
 import com.gestor.clases.Alumno;
-import com.gestor.clases.CursoAlumnos;
+import com.gestor.clases.Curso;
 import com.gestor.clases.Tutor;
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 public class ConsolaAlumno {
 	private static EntityManager manager;
@@ -148,7 +148,7 @@ public class ConsolaAlumno {
 	}
 
 	public static void modificarAlumno() {
-		final Curso[] cursos = Curso.values();
+		final NombreCurso[] cursos = NombreCurso.values();
 
 		String seguirModificando;
 		boolean bucle = true;
@@ -292,7 +292,7 @@ public class ConsolaAlumno {
 					sc.nextLine();
 					int cursoSeleccionado = sc.nextInt();
 
-					alumnoTemporal.setCursoAlumnos(manager.find(CursoAlumnos.class, cursos[cursoSeleccionado - 1]));
+					alumnoTemporal.setCursoAlumnos(manager.find(Curso.class, cursos[cursoSeleccionado - 1]));
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
@@ -312,7 +312,7 @@ public class ConsolaAlumno {
 
 	public static void mostrarAlumnosPorCurso() {
 		manager = enf.createEntityManager();
-		final Curso[] cursos = Curso.values();
+		final NombreCurso[] cursos = NombreCurso.values();
 		List<Alumno> todos;
 		List<Alumno> ninyosDelCurso = new ArrayList<Alumno>();
 
@@ -331,7 +331,7 @@ public class ConsolaAlumno {
 		// Recorremos los resultados con opcion de que no haya nada
 
 		for (Alumno al : todos) {
-			if (al.getCurso() == manager.find(CursoAlumnos.class, cursos[curso - 1])) {
+			if (al.getCurso() == manager.find(Curso.class, cursos[curso - 1])) {
 				ninyosDelCurso.add(al);
 			}
 		}

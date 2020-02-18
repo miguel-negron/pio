@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import com.gestor.clases.Vacantes;
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 public class ConsolaVacantes {
 	private static EntityManager manager;
@@ -51,7 +51,7 @@ public class ConsolaVacantes {
 		Vacantes vacante;
 		System.out.println("Elige el curso a modificar: \n1: Colonia. \n2: Manada. \n3: Tropa. \n4: Esculta. \n5: Clan");
 		curso = sc.nextInt();
-		Curso c = Curso.values()[curso-1];
+		NombreCurso c = NombreCurso.values()[curso-1];
 		vacante = manager.find(Vacantes.class, c);
 		System.out.println("Escribe el nuevo limite maximo.");
 		sc.nextLine();

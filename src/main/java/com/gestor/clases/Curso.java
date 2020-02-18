@@ -10,14 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 @Entity
 @Table(name="Cursos")
-public class CursoAlumnos {
+public class Curso {
 	
 	@Id
-	private Curso curso;
+	private NombreCurso curso;
 	
 	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Alumno> alumnos = new ArrayList<>();
@@ -28,21 +28,21 @@ public class CursoAlumnos {
 	@Column(name="NUMERO_MAXIMO_ALUMNOS")
 	private int numMaxAlumnos;
 	
-	public CursoAlumnos() {
+	public Curso() {
 		
 	}
 	
-	public CursoAlumnos(Curso curso) {
+	public Curso(NombreCurso curso) {
 		this.curso = curso;
 		numMaxAlumnos = 20;
 		numAlumnos = 0;
 	}
 	
-	public Curso getCurso() {
+	public NombreCurso getCurso() {
 		return curso;
 	}
 	
-	public void setCurso(Curso curso) {
+	public void setCurso(NombreCurso curso) {
 		this.curso = curso;
 	}
 	

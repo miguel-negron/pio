@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.gestor.enums.Cargo;
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 @Entity
 @Table(name = "MONITOR")
@@ -47,7 +47,7 @@ public class Monitor implements Serializable {
 	@Column(name = "OCUPACION")
 	private Cargo cargo;
 	@Column(name = "CURSO")
-	private Curso curso;
+	private NombreCurso curso;
 	@Column(name = "TIENE_TITULO")
 	private boolean tieneTitulo;
 
@@ -70,7 +70,7 @@ public class Monitor implements Serializable {
 			String telEmergencia1,
 			String telEmergencia2,
 			Cargo cargo,
-			Curso curso,
+			NombreCurso curso,
 			boolean tieneTitulo
 			) {
 		super();
@@ -224,12 +224,12 @@ public class Monitor implements Serializable {
 	}
 
 
-	public Curso getCurso() {
+	public NombreCurso getCurso() {
 		return curso;
 	}
 
 
-	public void setCurso(Curso curso) {
+	public void setCurso(NombreCurso curso) {
 		this.curso = curso;
 	}
 

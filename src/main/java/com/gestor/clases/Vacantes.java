@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 @Entity
 @Table(name = "VACANTES")
@@ -27,7 +27,7 @@ public class Vacantes implements Serializable {
 
 	@Id
 	@Column(name = "CURSO")
-	private Curso curso;
+	private NombreCurso curso;
 	@Column(name = "VACANTES")
 	private int vacantes;
 	@Column(name = "LIMITE")
@@ -36,7 +36,7 @@ public class Vacantes implements Serializable {
 	//Constructores
 	public Vacantes() {}
 
-	public Vacantes(Curso curso, int vacantes, int limite) {
+	public Vacantes(NombreCurso curso, int vacantes, int limite) {
 		super();
 		this.curso = curso;
 		this.vacantes = vacantes;
@@ -54,11 +54,11 @@ public class Vacantes implements Serializable {
 	
 	
 	//Getters and Setters
-	public Curso getCurso() {
+	public NombreCurso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(Curso curso) {
+	public void setCurso(NombreCurso curso) {
 		this.curso = curso;
 	}
 

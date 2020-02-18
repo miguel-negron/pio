@@ -9,13 +9,13 @@ import javax.persistence.Persistence;
 
 import com.gestor.clases.Alergia;
 import com.gestor.clases.Alumno;
-import com.gestor.clases.CursoAlumnos;
+import com.gestor.clases.Curso;
 import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
 import com.gestor.clases.Vacantes;
 import com.gestor.enums.Alergeno;
 import com.gestor.enums.Cargo;
-import com.gestor.enums.Curso;
+import com.gestor.enums.NombreCurso;
 
 public class Main {
 
@@ -39,6 +39,7 @@ public class Main {
 		manager.getTransaction().begin();
 		manager.persist(t);
 		manager.getTransaction().commit();
+		
 		List<Tutor> listaTutor = manager.createQuery("FROM Tutor").getResultList();
 		for (Tutor tu : listaTutor) {
 			//System.out.println(tu);
@@ -74,15 +75,15 @@ public class Main {
 		Alumno alumnoTemporal5 = new Alumno("5", "Miguel5", "Negron5", "ElMagnifico5", LocalDate.of(2005, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal5);
 		
-		Monitor monitorTemporal = new Monitor("1", "Roberto", "Cervantes", "kj", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k","k", Cargo.coordinacion, Curso.colonia, true);
+		Monitor monitorTemporal = new Monitor("1", "Roberto", "Cervantes", "kj", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k","k", Cargo.coordinacion, NombreCurso.colonia, true);
 		manager.persist(monitorTemporal);
-		Monitor monitorTemporal2 = new Monitor("2", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.esculta, false);
+		Monitor monitorTemporal2 = new Monitor("2", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, NombreCurso.esculta, false);
 		manager.persist(monitorTemporal2);
-		Monitor monitorTemporal3 = new Monitor("3", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.manada, false);
+		Monitor monitorTemporal3 = new Monitor("3", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, NombreCurso.manada, false);
 		manager.persist(monitorTemporal3);
-		Monitor monitorTemporal4 = new Monitor("4", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.manada, false);
+		Monitor monitorTemporal4 = new Monitor("4", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, NombreCurso.manada, false);
 		manager.persist(monitorTemporal4);
-		Monitor monitorTemporal5 = new Monitor("5", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, Curso.tropa, false);
+		Monitor monitorTemporal5 = new Monitor("5", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, NombreCurso.tropa, false);
 		manager.persist(monitorTemporal5);
 
 
@@ -91,9 +92,9 @@ public class Main {
 			System.out.println(Alergeno.values()[i]);
 		}
 		
-		for (int i = 0; i < Curso.values().length; i++) {
-			manager.persist(new CursoAlumnos(Curso.values()[i]));
-			System.out.println(Curso.values()[i]);
+		for (int i = 0; i < NombreCurso.values().length; i++) {
+			manager.persist(new Curso(NombreCurso.values()[i]));
+			System.out.println(NombreCurso.values()[i]);
 		}
 
 		manager.getTransaction().commit();
