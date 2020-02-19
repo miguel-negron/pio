@@ -1,5 +1,6 @@
 package com.gestor.consolas;
 
+import java.lang.module.FindException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -60,19 +61,19 @@ public class Main {
 		Vacantes vacante5 = new Vacantes(Curso.clan, 0, 5);
 		manager.persist(vacante5);*/
 		
-		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false);
+		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[0]));
 		manager.persist(alumnoTemporal);
 		
-		Alumno alumnoTemporal2 = new Alumno("2", "Miguel2", "Negron2", "ElMagnifico2", LocalDate.of(2002, 5, 5), listaTutor.get(0), true, false);
+		Alumno alumnoTemporal2 = new Alumno("2", "Miguel2", "Negron2", "ElMagnifico2", LocalDate.of(2002, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[1]));
 		manager.persist(alumnoTemporal2);
 		
-		Alumno alumnoTemporal3 = new Alumno("3", "Miguel", "Negron3", "ElMagnifico3", LocalDate.of(2014, 5, 5), listaTutor.get(0), true, false);
+		Alumno alumnoTemporal3 = new Alumno("3", "Miguel", "Negron3", "ElMagnifico3", LocalDate.of(2014, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[2]));
 		manager.persist(alumnoTemporal3);
 
-		Alumno alumnoTemporal4 = new Alumno("4", "Miguel4", "Negron4", "ElMagnifico4", LocalDate.of(2010, 5, 5), listaTutor.get(0), true, false);
+		Alumno alumnoTemporal4 = new Alumno("4", "Miguel4", "Negron4", "ElMagnifico4", LocalDate.of(2010, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[3]));
 		manager.persist(alumnoTemporal4);
 		
-		Alumno alumnoTemporal5 = new Alumno("5", "Miguel5", "Negron5", "ElMagnifico5", LocalDate.of(2005, 5, 5), listaTutor.get(0), true, false);
+		Alumno alumnoTemporal5 = new Alumno("5", "Miguel5", "Negron5", "ElMagnifico5", LocalDate.of(2005, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[4]));
 		manager.persist(alumnoTemporal5);
 		
 		Monitor monitorTemporal = new Monitor("1", "Roberto", "Cervantes", "kj", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k","k", Cargo.coordinacion, NombreCurso.colonia, true);

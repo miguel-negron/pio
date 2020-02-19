@@ -17,17 +17,21 @@ import com.gestor.clases.Tutor;
 import com.gestor.enums.NombreCurso;
 
 public class ConsolaAlumno {
+	//Abrimos managers
 	private static EntityManager manager;
 	private static EntityManagerFactory enf;
 
+	//Globales
 	private static Scanner sc = new Scanner(System.in);
 	static List<Tutor> listaTutores;
 	private static Alumno alumnoTemporal;
 
+	//Constructor
 	public ConsolaAlumno(EntityManagerFactory enf) {
 		ConsolaAlumno.enf = enf;
 	}
-
+	
+	//Metodo ciclico principal
 	public int mostrarConsolaAlumno() {
 		int respuesta;
 
@@ -55,7 +59,7 @@ public class ConsolaAlumno {
 				modificarAlumno();
 				break;
 			case 5:
-				mostrarAlumnosPorCurso();
+				mostrarAlumnosPorCurso2();
 				break;
 			case 6:
 				buscarAlumnoPorDni();
@@ -347,6 +351,47 @@ public class ConsolaAlumno {
 
 		manager.close();
 	}
+	
+	public static void mostrarAlumnosPorCurso2() {
+		//Abrimos manager
+		manager = enf.createEntityManager();
+		
+		//variable helper
+		Curso curso;
+		final NombreCurso[] cursos = NombreCurso.values();
+
+		// Peticion de curso por consola
+		System.out.println("Seleccione el curso que quiere mostrar:");
+		for (int i = 0; i < cursos.length; i++) {
+			System.out.println((i + 1) + ". " + cursos[i]);
+		}
+		int selec = sc.nextInt();
+		
+		curso = manager.find(Curso.class, cursos[selec]);
+		
+		
+		System.out.println(" - " + curso.getNombreCurso() + ": " + curso.getAlumnos().size() + " - ");
+		for (Alumno al : curso.getAlumnos()) {
+			System.out.println(al);
+		}
+		
+		/*
+		for(NombreCurso nombreCurso : NombreCurso.values()) {
+			curso = manager.find(Curso.class, nombreCurso);
+			
+			
+			System.out.println(" - " + curso.getNombreCurso() + ": " + curso.getAlumnos().size() + " - ");
+			for (Alumno al : curso.getAlumnos()) {
+				System.out.println(al);
+			}
+
+		}
+		*/
+		//Cerramos manager
+		manager.close();
+	}
+	
+	
 
 	public static void buscarAlumnoPorDni() {
 		System.out.println("Introduzca el DNI del alumno que desea buscar:");
@@ -359,7 +404,6 @@ public class ConsolaAlumno {
 			System.out.println("Alumno no encontrado.");
 		}
 		manager.close();
-
 	}
 
 	// Funcion para salir del programa

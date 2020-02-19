@@ -18,16 +18,14 @@ public class Curso {
 	
 	@Id
 	private NombreCurso curso;
-	
 	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Alumno> alumnos = new ArrayList<>();
-	
 	@Column(name="NUMERO_ALUMNOS")
 	private int numAlumnos;
-	
 	@Column(name="NUMERO_MAXIMO_ALUMNOS")
 	private int numMaxAlumnos;
 	
+	//Constructores vacio y solo con nombre
 	public Curso() {
 		
 	}
@@ -35,14 +33,15 @@ public class Curso {
 	public Curso(NombreCurso curso) {
 		this.curso = curso;
 		numMaxAlumnos = 20;
-		numAlumnos = 0;
+		setNumAlumnosAuto();
 	}
 	
-	public NombreCurso getCurso() {
+	//Getters y setters
+	public NombreCurso getNombreCurso() {
 		return curso;
 	}
 	
-	public void setCurso(NombreCurso curso) {
+	public void setNombreCurso(NombreCurso curso) {
 		this.curso = curso;
 	}
 	
@@ -51,17 +50,17 @@ public class Curso {
 	}
 	
 	public void addAlumno(Alumno alumno) {
-		alumnos.add(alumno);
+		this.alumnos.add(alumno);
 		alumno.setCursoAlumnos(this);
-		this.setNumAlumnos(getNumAlumnos() + 1);
+		this.setNumAlumnosAuto();
 	}
 
 	public int getNumAlumnos() {
 		return numAlumnos;
 	}
 
-	public void setNumAlumnos(int numAlumnos) {
-		this.numAlumnos = numAlumnos;
+	public void setNumAlumnosAuto() {
+		this.numAlumnos = this.alumnos.size();
 	}
 
 	public int getNumMaxAlumnos() {

@@ -3,7 +3,9 @@ package com.gestor.clases;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -15,7 +17,7 @@ import com.gestor.enums.Alergeno;
 public class Alergia {
 	@Id
 	private Alergeno alergeno;
-	@ManyToMany(mappedBy = "alergias")
+	@ManyToMany(mappedBy = "alergias", fetch = FetchType.EAGER)
 	private List<Alumno> alumnosAlergicos = new ArrayList<>();
 	//@ManyToMany(mappedBy = "alergias")
 	//private List<Alumno> monitoresAlergicos = new ArrayList<>();

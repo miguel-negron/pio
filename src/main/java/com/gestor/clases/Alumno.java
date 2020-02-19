@@ -9,11 +9,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.gestor.asistentes.AsistenteCurso;
 import com.gestor.enums.NombreCurso;
 
 @Entity
@@ -35,7 +38,7 @@ public class Alumno implements Serializable{
 	private String Apellido2;
 	@Column(name="FECHA_NACIMIENTO")
 	private LocalDate fechaNac;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	//@JoinColumn(name="DNI_TUTOR")
 	//@Column(name="DNI_TUTOR")
 	private Tutor Tutor;
@@ -43,17 +46,20 @@ public class Alumno implements Serializable{
 	private boolean fichaEntregada;
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
-	@ManyToOne
+	@ManyToOne 
+	@JoinColumn(name = "curso",
+				foreignKey = @ForeignKey(name="CURSO_DE_ALUMNO_FK"))
 	private Curso curso;
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
 	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
+	//Constructores
 	public Alumno() {
 		
 	}
 
 	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			com.gestor.clases.Tutor tutor, boolean fichaEntregada, boolean fotoEntregada) {
+			Tutor tutor, boolean fichaEntregada, boolean fotoEntregada) {
 		super();
 		DNI = dni;
 		Nombre = nombre;
@@ -65,8 +71,23 @@ public class Alumno implements Serializable{
 		this.fotoEntregada = fotoEntregada;
 		this.setCursoAutomatico();
 	}
+	
+	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
+			Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
+		super();
+		DNI = dni;
+		Nombre = nombre;
+		Apellido1 = apellido1;
+		Apellido2 = apellido2;
+		this.fechaNac = fechaNac;
+		Tutor = tutor;
+		this.fichaEntregada = fichaEntregada;
+		this.fotoEntregada = fotoEntregada;
+		this.curso = curso;
+	}
 
 
+	//Getters y setters
 	public String getDNI() {
 		return DNI;
 	}
