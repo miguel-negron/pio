@@ -45,6 +45,7 @@ public class Curso {
 		this.curso = curso;
 	}
 	
+	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Alumno> getAlumnos(){
 		return alumnos;
 	}
@@ -69,6 +70,13 @@ public class Curso {
 
 	public void setNumMaxAlumnos(int numMaxAlumnos) {
 		this.numMaxAlumnos = numMaxAlumnos;
+	}
+
+	@Override
+	public String toString() {
+		//si metemos + alumnos.size()  falla
+		return "Curso [curso=" + curso + ", alumnos=" + ", numAlumnos=" + numAlumnos + ", numMaxAlumnos="
+				+ numMaxAlumnos + "]";
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.gestor.consolas;
 
 import java.lang.module.FindException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,7 +23,7 @@ public class Main {
 
 	private static EntityManager manager; ///TEMPORAL
 	private static EntityManagerFactory enf; ///TEMPORAL
-
+	public static List<Curso> cursos = new ArrayList<Curso>();
 
 	public static void main(String[] args) {
 		// CREAMOS UN GESTOR DE PERSISTENCIA(MANAGER)
@@ -61,6 +62,18 @@ public class Main {
 		Vacantes vacante5 = new Vacantes(Curso.clan, 0, 5);
 		manager.persist(vacante5);*/
 		
+		for (int i = 0; i < NombreCurso.values().length; i++) {
+			cursos.add(new Curso(NombreCurso.values()[i]));
+			manager.persist(cursos.get(i));
+			//System.out.println(NombreCurso.values()[i]);
+		}
+		
+		manager.getTransaction().commit();
+		manager.getTransaction().begin();
+		
+		System.out.println("heeey");
+		System.out.println(manager.find(Curso.class, NombreCurso.values()[0]));
+		System.out.println("postheeey");
 		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[0]));
 		manager.persist(alumnoTemporal);
 		
@@ -90,15 +103,14 @@ public class Main {
 
 		for (int i = 0; i < Alergeno.values().length; i++) {
 			manager.persist(new Alergia(Alergeno.values()[i]));
-			System.out.println(Alergeno.values()[i]);
+			//System.out.println(Alergeno.values()[i]);
 		}
 		
-		for (int i = 0; i < NombreCurso.values().length; i++) {
-			manager.persist(new Curso(NombreCurso.values()[i]));
-			System.out.println(NombreCurso.values()[i]);
-		}
+		
 
 		manager.getTransaction().commit();
+		System.out.println(manager.find(Curso.class, NombreCurso.values()[0]));
+
 		manager.close();
 		////TEMPORAL
 		

@@ -83,7 +83,7 @@ public class Alumno implements Serializable{
 		Tutor = tutor;
 		this.fichaEntregada = fichaEntregada;
 		this.fotoEntregada = fotoEntregada;
-		this.curso = curso;
+		this.setCursoAlumnos(curso);;
 	}
 
 
@@ -166,7 +166,8 @@ public class Alumno implements Serializable{
 
 	public void setCursoAlumnos(Curso curso) {
 		this.curso = curso;
-		curso.addAlumno(this);
+		curso.getAlumnos().add(this);
+		curso.setNumAlumnosAuto();
 	}
 	
 	public void setCursoAutomatico() {

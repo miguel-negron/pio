@@ -21,7 +21,7 @@ public class Consola {
 					+ "1: Alumnos. \n"
 					+ "2: Monitores. \n"
 					+ "3: Lista de espera (No hay nada hecho)\n"					
-					+ "4: Alergias (algoS hecho) \n"
+					+ "4: Alergias (algo hecho) \n"
 					+ "5: Vacantes"
 					);
 			opcion = sc.nextInt();
