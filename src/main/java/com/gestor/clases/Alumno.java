@@ -16,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.gestor.asistentes.AsistenteCurso;
 import com.gestor.enums.NombreCurso;
 
 @Entity
@@ -46,12 +45,8 @@ public class Alumno implements Serializable{
 	private boolean fichaEntregada;
 	@Column(name="FOTO_ENTREGADA")
 	private boolean fotoEntregada;
-	@ManyToOne 
-	@JoinColumn(name = "curso",
-				foreignKey = @ForeignKey(name="CURSO_DE_ALUMNO_FK"))
-	private Curso curso;
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
-	private List<Alergia> alergias = new ArrayList<Alergia>();
+	@Column(name="CURSO")
+	private NombreCurso curso;
 	
 	//Constructores
 	public Alumno() {
@@ -72,20 +67,6 @@ public class Alumno implements Serializable{
 		this.setCursoAutomatico();
 	}
 	
-	public Alumno(String dni, String nombre, String apellido1, String apellido2, LocalDate fechaNac,
-			Tutor tutor, boolean fichaEntregada, boolean fotoEntregada, Curso curso) {
-		super();
-		DNI = dni;
-		Nombre = nombre;
-		Apellido1 = apellido1;
-		Apellido2 = apellido2;
-		this.fechaNac = fechaNac;
-		Tutor = tutor;
-		this.fichaEntregada = fichaEntregada;
-		this.fotoEntregada = fotoEntregada;
-		this.curso = curso;
-	}
-
 
 	//Getters y setters
 	public String getDNI() {
@@ -160,13 +141,12 @@ public class Alumno implements Serializable{
 		this.fotoEntregada = fotoEntregada;
 	}
 
-	public Curso getCurso() {
+	public NombreCurso getCurso() {
 		return curso;
 	}
 
-	public void setCursoAlumnos(Curso curso) {
+	public void setCursoAlumnos(NombreCurso curso) {
 		this.curso = curso;
-		curso.addAlumno(this);
 	}
 	
 	public void setCursoAutomatico() {
@@ -188,19 +168,6 @@ public class Alumno implements Serializable{
 		}
 	}
 
-	public List<Alergia> getAlergias() {
-		return alergias;
-	}
-	
-	public void addAlergia(Alergia alergia) {
-		this.alergias.add(alergia);
-		alergia.getAlumnosAlergicos().add(this);
-	}
-	
-	public void removeAlergia(Alergia alergia) {
-		this.alergias.remove(alergia);
-		alergia.getAlumnosAlergicos().remove(this);
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

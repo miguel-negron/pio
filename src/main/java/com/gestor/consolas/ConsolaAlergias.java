@@ -5,7 +5,6 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import com.gestor.clases.Alergia;
 import com.gestor.clases.Alumno;
 import com.gestor.enums.Alergeno;
 
@@ -31,20 +30,20 @@ public class ConsolaAlergias {
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:
-				// finalizarPrograma(respuesta);
+				respuesta = finalizarPrograma();
 				break;
 			case 1:
-				anyadirAlergiaPorId(sc);
+				//anyadirAlergiaPorId(sc);
 				break;
 			case 2:
-				showAlergias();
+				//showAlergias();
 				break;
 			case 3:
 				// mostrarAlumnosLista();
 				break;
 
 			case 7:
-				// retroceder(respuesta);
+				respuesta = retroceder();
 			}
 		}
 		return respuesta;
@@ -62,6 +61,7 @@ public class ConsolaAlergias {
 		return alumno;
 	}
 
+	/*
 	public void anyadirAlergiaPorId(Scanner sc) {
 		manager = emf.createEntityManager();
 		manager.getTransaction().begin();
@@ -123,6 +123,20 @@ public class ConsolaAlergias {
 		}
 
 		manager.close();
+	}
+	*/
+	
+	// Funcion para salir del programa
+	public static int finalizarPrograma() {
+		int respuesta = 0;
+		return respuesta;
+	}
+
+	// Funcion retroceder
+	// Nos permite volver al anterior men0
+	public static int retroceder() {
+		int respuesta = 9;
+		return respuesta;
 	}
 
 }// ConsolaAlergias

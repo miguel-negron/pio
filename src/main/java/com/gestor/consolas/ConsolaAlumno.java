@@ -12,7 +12,6 @@ import javax.persistence.RollbackException;
 import org.hibernate.query.Query;
 
 import com.gestor.clases.Alumno;
-import com.gestor.clases.Curso;
 import com.gestor.clases.Tutor;
 import com.gestor.enums.NombreCurso;
 
@@ -59,7 +58,7 @@ public class ConsolaAlumno {
 				modificarAlumno();
 				break;
 			case 5:
-				mostrarAlumnosPorCurso2();
+				mostrarAlumnosPorCurso();
 				break;
 			case 6:
 				buscarAlumnoPorDni();
@@ -296,7 +295,7 @@ public class ConsolaAlumno {
 					sc.nextLine();
 					int cursoSeleccionado = sc.nextInt();
 
-					alumnoTemporal.setCursoAlumnos(manager.find(Curso.class, cursos[cursoSeleccionado - 1]));
+					alumnoTemporal.setCursoAlumnos(cursos[cursoSeleccionado - 1]);
 					manager.getTransaction().begin();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
@@ -335,7 +334,7 @@ public class ConsolaAlumno {
 		// Recorremos los resultados con opcion de que no haya nada
 
 		for (Alumno al : todos) {
-			if (al.getCurso() == manager.find(Curso.class, cursos[curso - 1])) {
+			if (al.getCurso() == cursos[curso - 1]) {
 				ninyosDelCurso.add(al);
 			}
 		}
@@ -352,46 +351,7 @@ public class ConsolaAlumno {
 		manager.close();
 	}
 	
-	public static void mostrarAlumnosPorCurso2() {
-		//Abrimos manager
-		manager = enf.createEntityManager();
-		
-		//variable helper
-		Curso curso;
-		final NombreCurso[] cursos = NombreCurso.values();
 
-		// Peticion de curso por consola
-		System.out.println("Seleccione el curso que quiere mostrar:");
-		for (int i = 0; i < cursos.length; i++) {
-			System.out.println((i + 1) + ". " + cursos[i]);
-		}
-		int selec = sc.nextInt();
-		
-		curso = manager.find(Curso.class, cursos[selec]);
-		
-		
-		System.out.println(" - " + curso.getNombreCurso() + ": " + curso.getAlumnos().size() + " - ");
-		for (Alumno al : curso.getAlumnos()) {
-			System.out.println(al);
-		}
-		
-		/*
-		for(NombreCurso nombreCurso : NombreCurso.values()) {
-			curso = manager.find(Curso.class, nombreCurso);
-			
-			
-			System.out.println(" - " + curso.getNombreCurso() + ": " + curso.getAlumnos().size() + " - ");
-			for (Alumno al : curso.getAlumnos()) {
-				System.out.println(al);
-			}
-
-		}
-		*/
-		//Cerramos manager
-		manager.close();
-	}
-	
-	
 
 	public static void buscarAlumnoPorDni() {
 		System.out.println("Introduzca el DNI del alumno que desea buscar:");

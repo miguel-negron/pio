@@ -1,6 +1,5 @@
 package com.gestor.consolas;
 
-import java.lang.module.FindException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,9 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.gestor.clases.Alergia;
 import com.gestor.clases.Alumno;
-import com.gestor.clases.Curso;
 import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
 import com.gestor.clases.Vacantes;
@@ -50,30 +47,31 @@ public class Main {
 		manager = enf.createEntityManager();
 		manager.getTransaction().begin();
 		
-		/*Vacantes vacante1 = new Vacantes(Curso.colonia, 0, 5);
-		manager.persist(vacante1);
-		Vacantes vacante2 = new Vacantes(Curso.manada, 0, 5);
-		manager.persist(vacante2);
-		Vacantes vacante3 = new Vacantes(Curso.tropa, 0, 5);
-		manager.persist(vacante3);
-		Vacantes vacante4 = new Vacantes(Curso.esculta, 0, 5);
-		manager.persist(vacante4);
-		Vacantes vacante5 = new Vacantes(Curso.clan, 0, 5);
-		manager.persist(vacante5);*/
 		
-		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[0]));
+		Vacantes vacante1 = new Vacantes(NombreCurso.colonia, 5, 5);
+		manager.persist(vacante1);
+		Vacantes vacante2 = new Vacantes(NombreCurso.manada, 5, 5);
+		manager.persist(vacante2);
+		Vacantes vacante3 = new Vacantes(NombreCurso.tropa, 5, 5);
+		manager.persist(vacante3);
+		Vacantes vacante4 = new Vacantes(NombreCurso.esculta, 5, 5);
+		manager.persist(vacante4);
+		Vacantes vacante5 = new Vacantes(NombreCurso.clan, 5, 5);
+		manager.persist(vacante5);
+		
+		Alumno alumnoTemporal = new Alumno("1", "Miguel", "Negron", "ElMagnifico", LocalDate.of(2008, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal);
 		
-		Alumno alumnoTemporal2 = new Alumno("2", "Miguel2", "Negron2", "ElMagnifico2", LocalDate.of(2002, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[1]));
+		Alumno alumnoTemporal2 = new Alumno("2", "Miguel2", "Negron2", "ElMagnifico2", LocalDate.of(2002, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal2);
 		
-		Alumno alumnoTemporal3 = new Alumno("3", "Miguel", "Negron3", "ElMagnifico3", LocalDate.of(2014, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[2]));
+		Alumno alumnoTemporal3 = new Alumno("3", "Miguel", "Negron3", "ElMagnifico3", LocalDate.of(2014, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal3);
 
-		Alumno alumnoTemporal4 = new Alumno("4", "Miguel4", "Negron4", "ElMagnifico4", LocalDate.of(2010, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[3]));
+		Alumno alumnoTemporal4 = new Alumno("4", "Miguel4", "Negron4", "ElMagnifico4", LocalDate.of(2010, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal4);
 		
-		Alumno alumnoTemporal5 = new Alumno("5", "Miguel5", "Negron5", "ElMagnifico5", LocalDate.of(2005, 5, 5), listaTutor.get(0), true, false, manager.find(Curso.class, NombreCurso.values()[4]));
+		Alumno alumnoTemporal5 = new Alumno("5", "Miguel5", "Negron5", "ElMagnifico5", LocalDate.of(2005, 5, 5), listaTutor.get(0), true, false);
 		manager.persist(alumnoTemporal5);
 		
 		Monitor monitorTemporal = new Monitor("1", "Roberto", "Cervantes", "kj", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k","k", Cargo.coordinacion, NombreCurso.colonia, true);
@@ -87,16 +85,6 @@ public class Main {
 		Monitor monitorTemporal5 = new Monitor("5", "Roberto", "K", "k", LocalDate.of(2005, 5, 5), "k", "k", "k", "k", "k", "k", "k", Cargo.coordinacion, NombreCurso.tropa, false);
 		manager.persist(monitorTemporal5);
 
-
-		for (int i = 0; i < Alergeno.values().length; i++) {
-			manager.persist(new Alergia(Alergeno.values()[i]));
-			System.out.println(Alergeno.values()[i]);
-		}
-		
-		for (int i = 0; i < NombreCurso.values().length; i++) {
-			manager.persist(new Curso(NombreCurso.values()[i]));
-			System.out.println(NombreCurso.values()[i]);
-		}
 
 		manager.getTransaction().commit();
 		manager.close();
