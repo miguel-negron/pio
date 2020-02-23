@@ -241,7 +241,7 @@ public class ConsolaMonitor {
 				if(monitoresDelCurso.size() == 1) {
 					System.out.println("Hay " + monitoresDelCurso.size() + " monitor encargado del curso " + cursos[curso] + ": ");
 				}else {
-				System.out.println("Hay " + monitoresDelCurso.size() + " monitores encargado del curso " + cursos[curso] + ": ");
+				System.out.println("Hay " + monitoresDelCurso.size() + " monitores encargados del curso " + cursos[curso] + ": ");
 				}
 				for (Monitor m : monitoresDelCurso) {
 					System.out.println("\t" + m);

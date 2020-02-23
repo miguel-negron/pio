@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.RollbackException;
 
-import org.hibernate.query.Query;
 
 import com.gestor.clases.Alumno;
 import com.gestor.clases.Tutor;
@@ -125,7 +123,7 @@ public class ConsolaAlumno {
 				manager.merge(alumnoTemporal);
 				manager.remove(alumnoTemporal);
 				manager.getTransaction().commit();
-				System.out.println("Alumno " + alumnoTemporal + " borrado");
+				System.out.println("Alumno " + alumnoTemporal.getNombre() + " borrado");
 			} else {
 				System.out.println("Alumno no borrado.");
 			}
@@ -342,9 +340,16 @@ public class ConsolaAlumno {
 		if (ninyosDelCurso.isEmpty()) {
 			System.out.println("No se ha encontrado ningun alumno asignado a ese curso.");
 		} else {
+			if(ninyosDelCurso.size() == 1) {
+				System.out.println("Hay solo " + ninyosDelCurso.size() + " chaval en " + cursos[curso - 1] + ": ");
+				for (Alumno al : ninyosDelCurso) {
+					System.out.println(al);
+				}
+			} else {
 			System.out.println("Hay " + ninyosDelCurso.size() + " chavales en " + cursos[curso - 1] + ": ");
 			for (Alumno al : ninyosDelCurso) {
 				System.out.println(al);
+			}
 			}
 		}
 

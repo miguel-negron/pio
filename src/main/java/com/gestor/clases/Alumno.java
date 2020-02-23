@@ -159,7 +159,7 @@ public class Alumno implements Serializable{
 			//System.out.println(edadMin + "<- min : e ->" + edad);
 			
 			if (edad > edadMin) {
-				//this.setCursoAlumnos(cursos[i]);
+				this.setCursoAlumnos(cursos[i]);
 				//System.out.println(this.getCurso());
 				return;
 			} else {
