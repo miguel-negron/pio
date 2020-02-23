@@ -1,18 +1,19 @@
 package com.gestor.consolas;
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import com.gestor.clases.Alumno;
-import com.gestor.enums.Alergeno;
+import com.gestor.enums.Alergia;
 
 public class ConsolaAlergias {
 
 	private static EntityManager manager;
 	private static EntityManagerFactory emf;
-	Alergeno[] alergenos = Alergeno.values();
+	Alergia[] alergenos = Alergia.values();
 
 	public ConsolaAlergias(EntityManagerFactory enf) {
 		ConsolaAlergias.emf = enf;
@@ -33,10 +34,10 @@ public class ConsolaAlergias {
 				respuesta = finalizarPrograma();
 				break;
 			case 1:
-				//anyadirAlergiaPorId(sc);
+				anyadirAlergiaPorId(sc);
 				break;
 			case 2:
-				//showAlergias();
+				showAlergias();
 				break;
 			case 3:
 				// mostrarAlumnosLista();
@@ -61,7 +62,7 @@ public class ConsolaAlergias {
 		return alumno;
 	}
 
-	/*
+	
 	public void anyadirAlergiaPorId(Scanner sc) {
 		manager = emf.createEntityManager();
 		manager.getTransaction().begin();
@@ -82,16 +83,17 @@ public class ConsolaAlergias {
 
 			// Ciclar por las alergias que no tiene el alumno
 			for (int i = 0; i < alergenos.length; i++) {
-				if (!alumno.getAlergias().contains(manager.find(Alergia.class, alergenos[i]))) {
+				if (!alumno.getAlergias().contains(alergenos[i])) {
 					System.out.println("\t" + (i + 1) + ". " + alergenos[i]);
 				}
 			}
 			System.out.println("\t" + (alergenos.length + 1) + ". Finalizar");
 
 			selecAlergia = sc.nextInt() - 1;
+			
 			// System.out.println(selecAlergia + "sel -- len " + alergenos.length);
 			if (selecAlergia >= 0 && selecAlergia < alergenos.length) {
-				alumno.addAlergia(manager.find(Alergia.class, alergenos[selecAlergia]));
+				alumno.addAlergia(alergenos[selecAlergia]);
 			} else if (selecAlergia == (alergenos.length + 1)) {
 
 			} else {
@@ -101,7 +103,7 @@ public class ConsolaAlergias {
 		} while (selecAlergia != alergenos.length);
 
 		
-		manager.persist(alumno);
+		manager.flush();
 		manager.getTransaction().commit();
 
 		manager.close();
@@ -110,21 +112,27 @@ public class ConsolaAlergias {
 
 	public void showAlergias() {
 		manager = emf.createEntityManager();
-		Alergia alergia;
+		List<Alumno> todos;
+		String hql = "FROM Alumno";
+		todos = manager.createQuery(hql).getResultList();
 
+		System.out.println(todos.size());
 		for (int i = 0; i < alergenos.length; i++) {
-			alergia = manager.find(Alergia.class, alergenos[i]);
 
-			System.out.println(alergia.getAlumnosAlergicos());
-			for (Alumno al : alergia.getAlumnosAlergicos()) {
-				System.out.println(
-						"Dni: " + al.getDNI() + " -- Nombre: " + al.getNombre() + " -- Rama: " + al.getCurso());
+			System.out.println(alergenos[i]);
+			for (Alumno al : todos) {
+				System.out.println(al.getAlergias().size());
+				if (al.getAlergias().contains(alergenos[i])) {
+					System.out.println(
+							"Dni: " + al.getDNI() + " -- Nombre: " + al.getNombre() + " -- Rama: " + al.getCurso());
+
+				}
 			}
 		}
 
 		manager.close();
 	}
-	*/
+
 	
 	// Funcion para salir del programa
 	public static int finalizarPrograma() {

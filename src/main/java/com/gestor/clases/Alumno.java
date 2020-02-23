@@ -15,7 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import com.gestor.enums.Alergia;
 import com.gestor.enums.NombreCurso;
 
 @Entity
@@ -47,6 +49,8 @@ public class Alumno implements Serializable{
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
 	private NombreCurso curso;
+	@Transient
+	private List<Alergia> alergias = new ArrayList<Alergia>();
 	
 	//Constructores
 	public Alumno() {
@@ -168,6 +172,26 @@ public class Alumno implements Serializable{
 		}
 	}
 
+
+	public List<Alergia> getAlergias() {
+		return alergias;
+	}
+
+	public void addAlergia(Alergia alergia) {
+		if(!this.alergias.contains(alergia)) {
+			this.alergias.add(alergia);
+		}	
+	}
+	
+	public void removeAlergia(Alergia alergia) {
+		if (this.alergias.contains(alergia)) {
+			this.alergias.remove(alergia);
+		}
+	}
+
+	public void setCurso(NombreCurso curso) {
+		this.curso = curso;
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

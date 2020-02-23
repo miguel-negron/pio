@@ -1,6 +1,6 @@
 package com.gestor.enums;
 
-public enum Alergeno {
+public enum Alergia {
 	Pescado,
 	Huevo,
 	Gluten

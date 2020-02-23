@@ -11,7 +11,7 @@ import com.gestor.clases.Alumno;
 import com.gestor.clases.Monitor;
 import com.gestor.clases.Tutor;
 import com.gestor.clases.Vacantes;
-import com.gestor.enums.Alergeno;
+import com.gestor.enums.Alergia;
 import com.gestor.enums.Cargo;
 import com.gestor.enums.NombreCurso;
 
