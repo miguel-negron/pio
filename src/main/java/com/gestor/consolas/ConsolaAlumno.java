@@ -97,23 +97,34 @@ public class ConsolaAlumno {
 		} else {
 			System.out.println("Introduzca su nombre.");
 			nombreAlumno = sc.nextLine();
-			System.out.println("Introduzca el dni de su tutor.");
+			System.out.println("Tutores existentes (por dni):");
+			//Tutores
+			List<Tutor> todos;
+			String hql = "FROM Tutor";
+			todos = manager.createQuery(hql).getResultList();
+			
+			for (Tutor tutor : todos) {
+				System.out.println("\t" + tutor.getDNI() + ": " + tutor.getNombre());
+			}
+			System.out.println("\nIntroduzca un nuevo dni para crear otro tutor");
+
 			dniTutor = sc.nextLine();
 			// Tenemos que comprobar si existe el tutor en nuestra base de datos
 			Tutor tutor = manager.find(Tutor.class, dniTutor);
 			// Si existe anyadimos el alumno a la database y si no existe le pedimos que
 			// seleccione un tutor existente
 			if (tutor == null) {
-				System.out
-						.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
-			} else {
-				System.out.println("Introduzca su primer apellido.");
-				primerApellido = sc.nextLine();
-				System.out.println("Introduzca su segundo apellido.");
-				segundoApellido = sc.nextLine();
+				System.out.println("No hemos encontrado a ningun tutor con ese DNI.");
+				tutor = crearTutor(sc, dniTutor);
+				System.out.println(" - - Tutor creado - -");
+			} 
+				System.out.println("Introduzca su primer apellido del ninyo.");
+				primerApellido = sc.next();
+				System.out.println("Introduzca su segundo apellido del ninyo.");
+				segundoApellido = sc.next();
 				System.out.println("Ha entregado su ficha?S/N");
 				while (bucle) {
-					temporal = sc.nextLine();
+					temporal = sc.next();
 					if (temporal.toLowerCase().equals("s")) {
 						fichaEntregada = true;
 						bucle = false;
@@ -127,7 +138,7 @@ public class ConsolaAlumno {
 				bucle = true;
 				System.out.println("Ha entregado su foto?S/N");
 				while (bucle) {
-					temporal = sc.nextLine();
+					temporal = sc.next();
 					if (temporal.toLowerCase().equals("s")) {
 						fotoEntregada = true;
 						bucle = false;
@@ -138,11 +149,11 @@ public class ConsolaAlumno {
 						System.out.println("Entrada incorrecta, por favor escriba S o N.");
 					}
 				}
-				System.out.println("Escriba el dia.");
+				System.out.println("Escriba el dia de nacimiento - [dd]/mm/aaaa.");
 				diaFechaNacimiento = sc.nextInt();
-				System.out.println("Escriba el mes.");
+				System.out.println("Escriba el mes de nacimiento - " + diaFechaNacimiento + "/[mm]/aaaa.");
 				mesFechaNacimiento = sc.nextInt();
-				System.out.println("Escriba el anio.");
+				System.out.println("Escriba el anio de nacimiento - " + diaFechaNacimiento + "/" + mesFechaNacimiento + "/[aaaa].");
 				anyoFechaNacimiento = sc.nextInt();
 
 				alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, primerApellido, segundoApellido,
@@ -155,18 +166,39 @@ public class ConsolaAlumno {
 					System.out.println("Todas las plazas de este curso están ocupadas, alumno inscrito en la lista de espera.");
 					AlumnoEnEspera alumnoEspera = new AlumnoEnEspera(dniAlumno, nombreAlumno, LocalDate.of(anyoFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento), tutor.getDNI(), tutor.getNombre(), tutor.getTelMovil(), tutor.getEmail(), "");
 					manager.getTransaction().begin();
+					manager.persist(tutor);
+					manager.flush();
 					manager.persist(alumnoEspera);
 					manager.getTransaction().commit();
 				} else {
 					System.out.println("Alumno dado de alta con éxito.");
 					manager.getTransaction().begin();
+					manager.persist(tutor);
+					manager.flush();
 					manager.persist(alumnoTemporal);
 					manager.getTransaction().commit();
 				}
 
-			}
+			
 		}
 		manager.close();
+	}
+	
+	public static Tutor crearTutor(Scanner sc, String dni) {
+		Tutor t;
+		
+		System.out.println("Introduzca el nombre del tutor");
+		String nombre = sc.next();
+		
+		System.out.println("Introduzca el primer apellido del tutor");
+		String apellido1 = sc.next();
+		
+		System.out.println("Introduzca el segundo apellido del tutor");
+		String apellido2 = sc.next();
+		
+		t = new Tutor(dni, nombre, apellido1, apellido2, null, null, null, null, null, null);
+		
+		return t;
 	}
 
 	// Funcion eliminar

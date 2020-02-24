@@ -21,7 +21,7 @@ public class Consola {
 					+ "1: Alumnos. \n"
 					+ "2: Monitores. \n"
 					+ "3: Lista de espera\n"					
-					+ "4: Alergias (algo hecho) \n"
+					+ "4: Alergias\n"
 					+ "5: Vacantes.\n"
 					+ "6: Finalizar el programa."
 					);
