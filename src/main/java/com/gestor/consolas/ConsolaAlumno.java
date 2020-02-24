@@ -149,11 +149,11 @@ public class ConsolaAlumno {
 						System.out.println("Entrada incorrecta, por favor escriba S o N.");
 					}
 				}
-				System.out.println("Escriba el dia de nacimiento - [dd]/mm/aaaa.");
+				System.out.println("Escriba el dia de nacimiento");
 				diaFechaNacimiento = sc.nextInt();
-				System.out.println("Escriba el mes de nacimiento - " + diaFechaNacimiento + "/[mm]/aaaa.");
+				System.out.println("Escriba el mes de nacimiento");
 				mesFechaNacimiento = sc.nextInt();
-				System.out.println("Escriba el anio de nacimiento - " + diaFechaNacimiento + "/" + mesFechaNacimiento + "/[aaaa].");
+				System.out.println("Escriba el anio de nacimiento");
 				anyoFechaNacimiento = sc.nextInt();
 
 				alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, primerApellido, segundoApellido,

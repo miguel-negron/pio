@@ -23,8 +23,8 @@ public class ConsolaVacantes {
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
-					"1: Mostrar cursos.\n2: Modificar limite de alumnos en un curso.\n3: Volver atras."
-							+ "\n0: Finalizar el programa");
+					"\n\n\n1: Mostrar cursos.\n2: Modificar limite de alumnos en un curso.\n3: Volver atras."
+							+ "\n0: Finalizar el programa" + "\n\n\n");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:

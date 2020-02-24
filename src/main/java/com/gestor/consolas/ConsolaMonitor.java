@@ -26,8 +26,8 @@ public class ConsolaMonitor {
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
-					"1: Dar de alta a un monitor. \n2: Dar de baja a un monitor. \n3: Mostrar todos los monitores. \n4: Modificar los datos de un monitor.\n5: Buscar monitor por DNI. \n6: Mostrar monitores por curso. \n7: Mostrar los monitores que tienen certificado. \n8: Volver atras."
-							+ "\n0: Finalizar el programa");
+					"\n\n\n1: Dar de alta a un monitor. \n2: Dar de baja a un monitor. \n3: Mostrar todos los monitores. \n4: Modificar los datos de un monitor.\n5: Buscar monitor por DNI. \n6: Mostrar monitores por curso. \n7: Mostrar los monitores que tienen certificado. \n8: Volver atras."
+							+ "\n0: Finalizar el programa" + "\n\n\n");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:

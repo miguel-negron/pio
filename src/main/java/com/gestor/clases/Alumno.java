@@ -5,14 +5,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -49,8 +45,8 @@ public class Alumno implements Serializable{
 	private boolean fotoEntregada;
 	@Column(name="CURSO")
 	private NombreCurso curso;
-	@Transient
-	private List<Alergia> alergias = new ArrayList<Alergia>();
+	@Column(name="ALERGIA")
+	private Alergia alergia;
 	
 	//Constructores
 	public Alumno() {
@@ -173,20 +169,12 @@ public class Alumno implements Serializable{
 	}
 
 
-	public List<Alergia> getAlergias() {
-		return alergias;
+	public Alergia getAlergia() {
+		return alergia;
 	}
 
-	public void addAlergia(Alergia alergia) {
-		if(!this.alergias.contains(alergia)) {
-			this.alergias.add(alergia);
-		}	
-	}
-	
-	public void removeAlergia(Alergia alergia) {
-		if (this.alergias.contains(alergia)) {
-			this.alergias.remove(alergia);
-		}
+	public void setAlergia(Alergia alergia) {
+		this.alergia = alergia;
 	}
 
 	public void setCurso(NombreCurso curso) {

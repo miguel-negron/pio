@@ -26,24 +26,23 @@ public class ConsolaAlergias {
 
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
-			System.out.println("\n\n\n  - CONSOLA ALERGIAS - \n" + "1: Anyadir alergia por dni. \n"
-					+ "2: Ver todas las alergias. \n" + "3: NoNoNoNo. \n" + "0: Finalizar el programa" + "\n\n\n");
+			System.out.println("\n\n\n" + "1: Modificar la alergia de un alumno. \n"
+					+ "2: Ver todas las alergias. \n" + "3: Ver la alergia de cada alumno. \n" + "4: Retroceder.\n" + "0: Finalizar el programa" + "\n\n\n");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:
 				respuesta = finalizarPrograma();
 				break;
 			case 1:
-				anyadirAlergiaPorId(sc);
+				modificarAlergiaDeAlumno();
 				break;
 			case 2:
 				showAlergias();
 				break;
 			case 3:
-				// mostrarAlumnosLista();
+				 mostrarAlergiasAlumno();
 				break;
-
-			case 7:
+			case 4:
 				respuesta = retroceder();
 			}
 		}
@@ -63,59 +62,40 @@ public class ConsolaAlergias {
 	}
 
 	
-	public void anyadirAlergiaPorId(Scanner sc) {
-		manager = emf.createEntityManager();
-		manager.getTransaction().begin();
-		
-		int selecAlergia = 0;
+	public void modificarAlergiaDeAlumno() {
+		Alergia[] alergias = Alergia.values();
+		String dniAlumno;
+		Scanner sc = new Scanner(System.in);
 		Alumno alumno;
-
-		System.out.println("Introduzca el DNI del alumno que desea buscar:");
-		String dniAlumno = sc.next();
-		alumno = getAlumnoById(dniAlumno);
-		System.out.println("Anyadiendo alergia a " + alumno.getNombre() + " con DNI: " + alumno.getDNI());
-
-		if (alumno == null)
-			return;
-
-		do {
-			System.out.println("\nSeleccione la alergia a anyadir:");
-
-			// Ciclar por las alergias que no tiene el alumno
-			for (int i = 0; i < alergenos.length; i++) {
-				if (!alumno.getAlergias().contains(alergenos[i])) {
-					System.out.println("\t" + (i + 1) + ". " + alergenos[i]);
-				}
-			}
-			System.out.println("\t" + (alergenos.length + 1) + ". Finalizar");
-
-			selecAlergia = sc.nextInt() - 1;
-			
-			// System.out.println(selecAlergia + "sel -- len " + alergenos.length);
-			if (selecAlergia >= 0 && selecAlergia < alergenos.length) {
-				alumno.addAlergia(alergenos[selecAlergia]);
-			} else if (selecAlergia == (alergenos.length + 1)) {
-
-			} else {
-				System.out.println("introduzca un numero valido");
-			}
-			// De algun modo sale del while bien pero siguen sin salirme las cuentas
-		} while (selecAlergia != alergenos.length);
-
-		
-		manager.flush();
+		int n = 0;
+		Alergia alergia;
+		manager = emf.createEntityManager();
+		System.out.println("Escribe el DNI del alumno que deseas modificar.");
+		dniAlumno = sc.next();
+		alumno = manager.find(Alumno.class, dniAlumno);
+		System.out.println("Alumno: " + alumno.getNombre() + " " + alumno.getApellido1());
+		System.out.println("Seleccione la alergia que tiene:");
+		for(Alergia a: alergias) {
+			System.out.println(n + ": " + a.toString());
+			n++;
+		}
+		alergia = alergias[sc.nextInt()]; //Asumimos que no nos equivocamos y escribimos un numero mayor a los que hay
+		alumno.setAlergia(alergia);
+		manager.getTransaction().begin();
+		manager.merge(alumno);
 		manager.getTransaction().commit();
-
+		System.out.println("Alumno " + alumno.getNombre() + " modificado con alergia a :" + alumno.getAlergia());
 		manager.close();
 
 	}
 
 	public void showAlergias() {
-		manager = emf.createEntityManager();
-		List<Alumno> todos;
-		String hql = "FROM Alumno";
-		todos = manager.createQuery(hql).getResultList();
+		Alergia[] alergias = Alergia.values();
+		for(Alergia a: alergias) {
+			System.out.println(a.toString());
+		}
 
+		/*
 		System.out.println(todos.size());
 		for (int i = 0; i < alergenos.length; i++) {
 
@@ -128,11 +108,25 @@ public class ConsolaAlergias {
 
 				}
 			}
-		}
-
-		manager.close();
+		}*/
 	}
 
+	public void mostrarAlergiasAlumno() {
+		manager = emf.createEntityManager();
+		List<Alumno> todos;
+		String hql = "FROM Alumno";
+		int contador = 0;
+		todos = manager.createQuery(hql).getResultList();
+		for(Alumno a: todos) {
+			if(a.getAlergia() != null) {
+				System.out.println("Alumno " + a.getNombre() + " " + a.getApellido1() + " tiene alergia al: " + a.getAlergia());
+				contador++;
+			}
+		}
+		if(contador == 0) {
+			System.out.println("Ningun alumno tiene alergias!");
+		}
+	}
 	
 	// Funcion para salir del programa
 	public static int finalizarPrograma() {

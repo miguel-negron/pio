@@ -29,11 +29,11 @@ public class ConsolaListaDeEspera {
 
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
-			System.out.println("\n" + "1: Dar de alta a un alumno. \n" + "2: Dar de baja a un alumno. \n"
+			System.out.println("\n\n\n" + "1: Dar de alta a un alumno. \n" + "2: Dar de baja a un alumno. \n"
 					+ "3: Mostrar todos los alumnos. \n" + "4: Modificar los datos de un alumno. \n"
 					+ "5: Mostrar alumnos por curso elegido. \n" + "6: Busqueda de alumno por DNI. \n"
 					+ "7: Actualizar vacantes. \n" + "8: Mostrar alumnos con posibilidad de entrada.\n"
-					+ "9: Volver atras. \n" + "0: Finalizar el programa." + "\n");
+					+ "9: Volver atras. \n" + "0: Finalizar el programa." + "\n\n\n");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
 			case 0:
@@ -401,8 +401,6 @@ public class ConsolaListaDeEspera {
 		manager = emf.createEntityManager();
 		cursosVacantes = manager.createQuery("FROM Vacantes").getResultList();
 		alumnosEnEspera = manager.createQuery("FROM AlumnoEnEspera order by fechaEntrada").getResultList();
-		Tutor tutor;
-		Alumno alumno;
 		int contador = 0;
 		for (Vacantes v : cursosVacantes) {
 			// Comprobamos si hay plazas disponibles en cada curso
