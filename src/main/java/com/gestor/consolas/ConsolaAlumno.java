@@ -8,27 +8,28 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-
 import com.gestor.clases.Alumno;
+import com.gestor.clases.AlumnoEnEspera;
 import com.gestor.clases.Tutor;
+import com.gestor.clases.Vacantes;
 import com.gestor.enums.NombreCurso;
 
 public class ConsolaAlumno {
-	//Abrimos managers
+	// Abrimos managers
 	private static EntityManager manager;
 	private static EntityManagerFactory enf;
 
-	//Globales
+	// Globales
 	private static Scanner sc = new Scanner(System.in);
 	static List<Tutor> listaTutores;
 	private static Alumno alumnoTemporal;
 
-	//Constructor
+	// Constructor
 	public ConsolaAlumno(EntityManagerFactory enf) {
 		ConsolaAlumno.enf = enf;
 	}
-	
-	//Metodo ciclico principal
+
+	// Metodo ciclico principal
 	public int mostrarConsolaAlumno() {
 		int respuesta;
 
@@ -74,35 +75,96 @@ public class ConsolaAlumno {
 		String dniAlumno;
 		String nombreAlumno;
 		String dniTutor;
+		String primerApellido;
+		String segundoApellido;
+		boolean fichaEntregada = false;
+		boolean fotoEntregada = false;
+		boolean bucle = true;
+		String temporal;
+		int diaFechaNacimiento;
+		int mesFechaNacimiento;
+		int anyoFechaNacimiento;
 
 		manager = enf.createEntityManager();
 		System.out.println("Insertamos un alumno por consola.");
 		System.out.println("Introduzca su DNI.");
 		dniAlumno = sc.next();
-		System.out.println(dniAlumno);
 		sc.nextLine();
-		System.out.println("Introduzca su nombre.");
-		nombreAlumno = sc.nextLine();
-		System.out.println("Introduzca el dni de su tutor.");
-		dniTutor = sc.nextLine();
-		// Tenemos que comprobar si existe el tutor en nuestra base de datos
-		Tutor tutor2 = manager.find(Tutor.class, dniTutor);
-		// Si existe anyadimos el alumno a la database y si no existe le pedimos que
-		// seleccione un tutor existente
-		if (tutor2 == null) {
-			System.out.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
+		Alumno alumnoRepetido = manager.find(Alumno.class, dniAlumno);
+		// Comprobamos que no exista ningun otro alumno con el mismo dni
+		if (alumnoRepetido != null) {
+			System.out.println("Ya existe otro alumno con el mismo DNI.");
 		} else {
-			alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, "", "", LocalDate.now(), tutor2, true, true);
-			Alumno alumnoRepetido = manager.find(Alumno.class, alumnoTemporal.getDNI());
-			//Comprobamos que no exista ningun otro alumno con el mismo dni
-			if(alumnoRepetido != null) {
-				System.out.println("Ya existe otro alumno con el mismo DNI.");
+			System.out.println("Introduzca su nombre.");
+			nombreAlumno = sc.nextLine();
+			System.out.println("Introduzca el dni de su tutor.");
+			dniTutor = sc.nextLine();
+			// Tenemos que comprobar si existe el tutor en nuestra base de datos
+			Tutor tutor = manager.find(Tutor.class, dniTutor);
+			// Si existe anyadimos el alumno a la database y si no existe le pedimos que
+			// seleccione un tutor existente
+			if (tutor == null) {
+				System.out
+						.println("No hemos encontrado a ningun tutor con ese DNI, por favor eliga un tutor existente.");
 			} else {
-				manager.getTransaction().begin();
-				manager.persist(alumnoTemporal);
-				manager.getTransaction().commit();
-			}
+				System.out.println("Introduzca su primer apellido.");
+				primerApellido = sc.nextLine();
+				System.out.println("Introduzca su segundo apellido.");
+				segundoApellido = sc.nextLine();
+				System.out.println("Ha entregado su ficha?S/N");
+				while (bucle) {
+					temporal = sc.nextLine();
+					if (temporal.toLowerCase().equals("s")) {
+						fichaEntregada = true;
+						bucle = false;
+					} else if (temporal.toLowerCase().equals("n")) {
+						fichaEntregada = false;
+						bucle = false;
+					} else {
+						System.out.println("Entrada incorrecta, por favor escriba S o N.");
+					}
+				}
+				bucle = true;
+				System.out.println("Ha entregado su foto?S/N");
+				while (bucle) {
+					temporal = sc.nextLine();
+					if (temporal.toLowerCase().equals("s")) {
+						fotoEntregada = true;
+						bucle = false;
+					} else if (temporal.toLowerCase().equals("n")) {
+						fotoEntregada = false;
+						bucle = false;
+					} else {
+						System.out.println("Entrada incorrecta, por favor escriba S o N.");
+					}
+				}
+				System.out.println("Escriba el dia.");
+				diaFechaNacimiento = sc.nextInt();
+				System.out.println("Escriba el mes.");
+				mesFechaNacimiento = sc.nextInt();
+				System.out.println("Escriba el anio.");
+				anyoFechaNacimiento = sc.nextInt();
 
+				alumnoTemporal = new Alumno(dniAlumno, nombreAlumno, primerApellido, segundoApellido,
+						LocalDate.of(anyoFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento), tutor,
+						fichaEntregada, fotoEntregada);
+				Vacantes vacante = manager.find(Vacantes.class, alumnoTemporal.getCurso());
+				if (vacante.anyadePlazaOcupada() == true) {
+					// Como se ha alcanzado el cupo de alumnos en este curso, lo introducimos en la
+					// lista de espera
+					System.out.println("Todas las plazas de este curso están ocupadas, alumno inscrito en la lista de espera.");
+					AlumnoEnEspera alumnoEspera = new AlumnoEnEspera(dniAlumno, nombreAlumno, LocalDate.of(anyoFechaNacimiento, mesFechaNacimiento, diaFechaNacimiento), tutor.getDNI(), tutor.getNombre(), tutor.getTelMovil(), tutor.getEmail(), "");
+					manager.getTransaction().begin();
+					manager.persist(alumnoEspera);
+					manager.getTransaction().commit();
+				} else {
+					System.out.println("Alumno dado de alta con éxito.");
+					manager.getTransaction().begin();
+					manager.persist(alumnoTemporal);
+					manager.getTransaction().commit();
+				}
+
+			}
 		}
 		manager.close();
 	}
@@ -119,6 +181,9 @@ public class ConsolaAlumno {
 			String confirmacion = sc.nextLine();
 			if (confirmacion.toLowerCase().equals("s")) {
 				// Borramos
+				//Lo eliminamos del curso
+				Vacantes vacante = manager.find(Vacantes.class, alumnoTemporal.getCurso());
+				vacante.reducePlazaOcupada();
 				manager.getTransaction().begin();
 				manager.merge(alumnoTemporal);
 				manager.remove(alumnoTemporal);
@@ -340,23 +405,21 @@ public class ConsolaAlumno {
 		if (ninyosDelCurso.isEmpty()) {
 			System.out.println("No se ha encontrado ningun alumno asignado a ese curso.");
 		} else {
-			if(ninyosDelCurso.size() == 1) {
+			if (ninyosDelCurso.size() == 1) {
 				System.out.println("Hay solo " + ninyosDelCurso.size() + " chaval en " + cursos[curso - 1] + ": ");
 				for (Alumno al : ninyosDelCurso) {
 					System.out.println(al);
 				}
 			} else {
-			System.out.println("Hay " + ninyosDelCurso.size() + " chavales en " + cursos[curso - 1] + ": ");
-			for (Alumno al : ninyosDelCurso) {
-				System.out.println(al);
-			}
+				System.out.println("Hay " + ninyosDelCurso.size() + " chavales en " + cursos[curso - 1] + ": ");
+				for (Alumno al : ninyosDelCurso) {
+					System.out.println(al);
+				}
 			}
 		}
 
 		manager.close();
 	}
-	
-
 
 	public static void buscarAlumnoPorDni() {
 		System.out.println("Introduzca el DNI del alumno que desea buscar:");

@@ -23,7 +23,7 @@ public class ConsolaVacantes {
 		respuesta = 10;
 		while (respuesta != 0 && respuesta != 9) {
 			System.out.println(
-					"1: Mostrar cursos con sus vacantes.\n2: Modificar limite de alumnos en un curso.\n3: Volver atras."
+					"1: Mostrar cursos.\n2: Modificar limite de alumnos en un curso.\n3: Volver atras."
 							+ "\n0: Finalizar el programa");
 			respuesta = sc.nextInt();
 			switch (respuesta) {
@@ -56,11 +56,16 @@ public class ConsolaVacantes {
 		System.out.println("Escribe el nuevo limite maximo.");
 		sc.nextLine();
 		limiteMaximo = sc.nextInt();
-		vacante.setLimite(limiteMaximo);
-		manager.getTransaction().begin();
-		manager.merge(vacante);
-		manager.getTransaction().commit();
-		System.out.println("Curso modificado");
+		if(limiteMaximo < vacante.getPlazas()) {
+			//Hemos puesto un limite menor al numero de alumnos inscritos, asi que pedimos un limite igual o mayor
+			System.out.println("El limite escrito es menor que el numero de alumnos inscritos. Por favor, escriba un numero igual o mayor que "  + vacante.getLimite());
+		} else {
+			vacante.setLimite(limiteMaximo);
+			manager.getTransaction().begin();
+			manager.merge(vacante);
+			manager.getTransaction().commit();
+			System.out.println("Curso modificado");
+		}
 	}
 	
 	public void mostrarCursos() {

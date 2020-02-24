@@ -27,7 +27,7 @@ public class AlumnoEnEspera implements Serializable {
 	@Column(name = "CURSO")
 	private NombreCurso curso;
 	@Column(name = "ENTRADA")
-	private LocalDate fectaEntrada;
+	private LocalDate fechaEntrada;
 	
 	@Column(name = "DNI_TUTOR")
 	private String dniTutor;
@@ -62,7 +62,7 @@ public class AlumnoEnEspera implements Serializable {
 		this.telContacto = telContacto;
 		this.emailContacto = emailContacto;
 		this.infoAdicional = infoAdicional;
-		this.fectaEntrada = LocalDate.now();
+		this.fechaEntrada = LocalDate.now();
 		this.setCursoAutomatico();
 	}
 
@@ -119,11 +119,11 @@ public class AlumnoEnEspera implements Serializable {
 	}
 
 	public LocalDate getFectaEntrada() {
-		return fectaEntrada;
+		return fechaEntrada;
 	}
 
 	public void setFectaEntrada(LocalDate fectaEntrada) {
-		this.fectaEntrada = fectaEntrada;
+		this.fechaEntrada = fectaEntrada;
 	}
 
 	public String getDniTutor() {
@@ -168,16 +168,16 @@ public class AlumnoEnEspera implements Serializable {
 
 	@Override
 	public String toString() {
-		return "dni=" + dni + "\n"
-				+ "\tnombre=" + nombre + "\n"
-				+ "\tfechaNac=" + fechaNac + "\n"
-				+ "\tcurso=" + curso + "\n"
-				+ "\tfectaEntrada=" + fectaEntrada + "\n"
-				+ "\tdniTutor=" + dniTutor + "\n"
-				+ "\tnombreTutor=" + nombreTutor + "\n"
-				+ "\ttelContacto=" + telContacto + "\n"
-				+ "\temailContacto=" + emailContacto + "\n"
-				+ "\tinfoAdicional=" + infoAdicional;
+		return "DNI: " + dni + "\n"
+				+ "\tAlumno: " + nombre + "\n"
+				+ "\tFecha de Nacimiento: " + fechaNac + "\n"
+				+ "\tCurso objetivo: " + curso + "\n"
+				+ "\tFecha de Entrada: " + fechaEntrada + "\n"
+				+ "\tDNI del tutor: " + dniTutor + "\n"
+				+ "\tNombre del tutor: " + nombreTutor + "\n"
+				+ "\tTelefono de Contacto: " + telContacto + "\n"
+				+ "\tEmail: " + emailContacto + "\n"
+				+ "\tInformacion adicional: " + infoAdicional;
 	}
 	
 }

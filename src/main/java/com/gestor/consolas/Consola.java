@@ -20,9 +20,10 @@ public class Consola {
 			System.out.println("Seleccione el apartado que desea administrar.\n"
 					+ "1: Alumnos. \n"
 					+ "2: Monitores. \n"
-					+ "3: Lista de espera (No hay nada hecho)\n"					
+					+ "3: Lista de espera\n"					
 					+ "4: Alergias (algo hecho) \n"
-					+ "5: Vacantes (por hacer)"
+					+ "5: Vacantes.\n"
+					+ "6: Finalizar el programa."
 					);
 			opcion = sc.nextInt();
 			
@@ -50,6 +51,9 @@ public class Consola {
 			case 5:
 				ConsolaVacantes cv = new ConsolaVacantes(enf);
 				respuesta = cv.mostrarConsolaVacante();
+				break;
+			case 6:
+				respuesta = 0;
 				break;
 			}
 		}

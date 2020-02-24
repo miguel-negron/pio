@@ -28,28 +28,35 @@ public class Vacantes implements Serializable {
 	@Id
 	@Column(name = "CURSO")
 	private NombreCurso curso;
-	@Column(name = "VACANTES")
-	private int vacantes;
+	@Column(name = "PLAZAS_LIBRES")
+	private int plazasOcupadas;
 	@Column(name = "LIMITE")
 	private int limite;
 
 	//Constructores
 	public Vacantes() {}
 
-	public Vacantes(NombreCurso curso, int vacantes, int limite) {
+	public Vacantes(NombreCurso curso, int plazas, int limite) {
 		super();
 		this.curso = curso;
-		this.vacantes = vacantes;
+		this.plazasOcupadas = plazas;
 		this.limite = limite;
 	}
 
 	//Auto ++ y --
-	public void anyadeVacante() {
-		this.setVacantes(this.getVacantes() + 1);
+	public boolean anyadePlazaOcupada() {
+		boolean limiteAlcanzado = false;
+		if(plazasOcupadas == limite) {
+			//Si todas las plazas están ocupadas, metemos al alumno en la lista de espera
+			limiteAlcanzado = true;
+		}else {
+		this.setPlazas(this.getPlazas() + 1);
+		}
+		return limiteAlcanzado;
 	}
 	
-	public void reduceVacante() {
-		this.setVacantes(this.getVacantes() - 1);
+	public void reducePlazaOcupada() {
+		this.setPlazas(this.getPlazas() - 1);
 	}
 	
 	
@@ -62,12 +69,12 @@ public class Vacantes implements Serializable {
 		this.curso = curso;
 	}
 
-	public int getVacantes() {
-		return vacantes;
+	public int getPlazas() {
+		return plazasOcupadas;
 	}
 
-	public void setVacantes(int vacantes) {
-		this.vacantes = vacantes;
+	public void setPlazas(int plazas) {
+		plazasOcupadas = plazas;
 	}
 
 	public static long getSerialversionuid() {
@@ -76,7 +83,7 @@ public class Vacantes implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Vacantes: curso=" + curso + ", vacantes=" + vacantes + ", limite= " + limite + ".";
+		return "Vacantes: curso= " + curso + ", Plazas ocupadas= " + plazasOcupadas + ", limite= " + limite + ".";
 	}
 
 	
